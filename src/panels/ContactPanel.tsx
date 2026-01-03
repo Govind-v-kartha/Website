@@ -65,11 +65,22 @@ export default function ContactPanel() {
     } catch (error) {
       setStatus('error')
       console.error('Full EmailJS error:', error)
+      
+      let errorDetails = ''
       if (error instanceof Error) {
+        errorDetails = error.message
         console.error('Error message:', error.message)
         console.error('Error stack:', error.stack)
       }
-      setMessage('Failed to send message. Please try again or email directly.')
+      
+      // Check for specific EmailJS errors
+      if (errorDetails.includes('401') || errorDetails.includes('Invalid credentials')) {
+        setMessage('EmailJS credentials are invalid. Please check your environment variables.')
+      } else if (errorDetails.includes('404') || errorDetails.includes('Template not found')) {
+        setMessage('Email template not found. Please configure EmailJS correctly.')
+      } else {
+        setMessage('Failed to send message. Please try again or email directly.')
+      }
     }
   }
 

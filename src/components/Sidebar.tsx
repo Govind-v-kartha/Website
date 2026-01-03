@@ -82,9 +82,11 @@ export default function Sidebar({ activePanel, onPanelChange }: SidebarProps) {
             whileHover={{ translateY: -2 }}
           >
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-md hover:shadow-lg hover:scale-105 transition-all">
-                GK
-              </div>
+              <img
+                src="/GVK.jpg"
+                alt="Govind V Kartha"
+                className="w-14 h-14 rounded-xl object-cover shadow-md hover:shadow-lg hover:scale-105 transition-all"
+              />
               <div className="flex-1">
                 <p className="font-bold text-slate-900 text-sm leading-tight">Govind V Kartha</p>
               </div>
