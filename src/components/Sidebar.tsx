@@ -83,7 +83,7 @@ export default function Sidebar({ activePanel, onPanelChange }: SidebarProps) {
           >
             <div className="flex items-center gap-3 mb-3">
               <img
-                src="/GVK.jpg"
+                src="/profile.jpg"
                 alt="Govind V Kartha"
                 className="w-14 h-14 rounded-xl object-cover shadow-md hover:shadow-lg hover:scale-105 transition-all"
               />
