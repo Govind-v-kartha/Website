@@ -1,0 +1,694 @@
+/* ──────────────────────────────────────
+   RESET & BASE STYLES
+   ────────────────────────────────────── */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: #2c3e50;
+    background-color: #ffffff;
+    overflow-x: hidden;
+}
+
+/* ──────────────────────────────────────
+   TYPOGRAPHY
+   ────────────────────────────────────── */
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 0.75rem;
+}
+
+h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 0.75rem;
+}
+
+p {
+    margin-bottom: 1rem;
+    line-height: 1.8;
+    color: #333;
+}
+
+ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+    color: #333;
+}
+
+strong {
+    color: #1a1a1a;
+}
+
+a {
+    color: #2c5aa0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #1e3f66;
+}
+
+/* ──────────────────────────────────────
+   LAYOUT - SIDEBAR + MAIN
+   ────────────────────────────────────── */
+.main-container {
+    margin-left: 240px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ──────────────────────────────────────
+   SIDEBAR NAVIGATION
+   ────────────────────────────────────── */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 240px;
+    height: 100vh;
+    background-color: #f8f9fa;
+    border-right: 1px solid #e0e0e0;
+    padding: 30px 0;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.sidebar-header {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-bottom: 30px;
+}
+
+.sidebar-header h2 {
+    font-size: 1.3rem;
+    margin: 0;
+    border: none;
+    padding: 0;
+}
+
+.sidebar-close {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #1a1a1a;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-link {
+    display: block;
+    padding: 12px 30px;
+    color: #2c3e50;
+    font-weight: 500;
+    font-size: 1rem;
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    background-color: #e8f0f7;
+    border-left-color: #2c5aa0;
+    color: #2c5aa0;
+}
+
+.nav-link.active {
+    background-color: #e8f0f7;
+    border-left-color: #2c5aa0;
+    color: #2c5aa0;
+}
+
+/* ──────────────────────────────────────
+   MOBILE HEADER (Hidden on Desktop)
+   ────────────────────────────────────── */
+.mobile-header {
+    display: none;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+    gap: 15px;
+}
+
+.sidebar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #1a1a1a;
+}
+
+.mobile-title {
+    font-size: 1.3rem;
+    margin: 0;
+    flex-grow: 1;
+}
+
+/* ──────────────────────────────────────
+   MAIN CONTENT AREA
+   ────────────────────────────────────── */
+.content {
+    flex: 1;
+    width: 100%;
+}
+
+.section-content {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+/* ──────────────────────────────────────
+   SECTIONS - GENERAL STYLING
+   ────────────────────────────────────── */
+section {
+    padding: 60px 0;
+    border-bottom: 1px solid #e0e0e0;
+    animation: fadeInUp 0.5s ease-out;
+    animation-fill-mode: both;
+}
+
+section:nth-child(1) { animation-delay: 0s; }
+section:nth-child(2) { animation-delay: 0.1s; }
+section:nth-child(3) { animation-delay: 0.2s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ──────────────────────────────────────
+   HERO SECTION
+   ────────────────────────────────────── */
+.hero {
+    background-color: #f8f9fa;
+    text-align: center;
+    padding: 60px 0;
+}
+
+.hero .section-content {
+    max-width: 600px;
+}
+
+.hero-name {
+    font-size: 2.8rem;
+    margin-bottom: 0.75rem;
+}
+
+.hero-title {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.hero-location {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 0.3rem;
+}
+
+.hero-email {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+/* ──────────────────────────────────────
+   BUTTONS
+   ────────────────────────────────────── */
+.btn {
+    display: inline-block;
+    padding: 11px 28px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+    text-align: center;
+    min-width: 170px;
+}
+
+.btn-primary {
+    background-color: #2c5aa0;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #1e3f66;
+    text-decoration: none;
+}
+
+.btn-secondary {
+    background-color: #666;
+    color: #ffffff;
+    min-width: auto;
+    padding: 9px 22px;
+    font-size: 0.9rem;
+}
+
+.btn-secondary:hover {
+    background-color: #444;
+    text-decoration: none;
+}
+
+/* ──────────────────────────────────────
+   PROFILE SECTION
+   ────────────────────────────────────── */
+.profile {
+    background-color: #ffffff;
+    padding: 50px 0;
+}
+
+.profile p {
+    margin-bottom: 1.1rem;
+}
+
+/* ──────────────────────────────────────
+   SKILLS SECTION
+   ────────────────────────────────────── */
+.skills {
+    background-color: #f8f9fa;
+    padding: 50px 0;
+}
+
+.skill-category {
+    margin-bottom: 2.5rem;
+}
+
+.skill-category h3 {
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+}
+
+.skill-category ul {
+    margin-left: 1.5rem;
+    list-style: none;
+}
+
+.skill-category li {
+    padding-left: 1.5rem;
+    position: relative;
+    margin-bottom: 0.7rem;
+}
+
+.skill-category li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #2c5aa0;
+    font-weight: bold;
+}
+
+.skill-subsection p {
+    margin-bottom: 0.8rem;
+}
+
+/* ──────────────────────────────────────
+   PROJECTS SECTION - LEFT ACCENT BLOCKS
+   ────────────────────────────────────── */
+.projects {
+    background-color: #ffffff;
+}
+
+.project {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    padding-left: 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+    border-left: 3px solid #2c5aa0;
+}
+
+.project:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.project h3 {
+    color: #1a1a1a;
+    margin-bottom: 0.75rem;
+}
+
+.project > p {
+    margin-bottom: 0.75rem;
+}
+
+.project-details {
+    margin: 1.25rem 0;
+}
+
+.project-detail {
+    margin-bottom: 1.25rem;
+}
+
+.project-detail strong {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.project-detail ul {
+    margin-left: 1.5rem;
+    list-style: none;
+}
+
+.project-detail li {
+    padding-left: 1.5rem;
+    position: relative;
+    margin-bottom: 0.5rem;
+}
+
+.project-detail li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #2c5aa0;
+    font-weight: bold;
+}
+
+.project .btn {
+    margin-top: 0.75rem;
+}
+
+/* ──────────────────────────────────────
+   EDUCATION SECTION
+   ────────────────────────────────────── */
+.education {
+    background-color: #f8f9fa;
+    padding: 50px 0;
+}
+
+.education-item {
+    margin-bottom: 1.25rem;
+}
+
+/* ──────────────────────────────────────
+   CERTIFICATIONS SECTION
+   ────────────────────────────────────── */
+.certifications {
+    background-color: #ffffff;
+    padding: 50px 0;
+}
+
+.certifications ul {
+    margin-left: 1.5rem;
+    list-style: none;
+}
+
+.certifications li {
+    padding-left: 1.5rem;
+    position: relative;
+    margin-bottom: 0.8rem;
+}
+
+.certifications li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #2c5aa0;
+    font-weight: bold;
+}
+
+/* ──────────────────────────────────────
+   CONTACT SECTION
+   ────────────────────────────────────── */
+.contact {
+    background-color: #f8f9fa;
+    padding: 50px 0;
+}
+
+.contact-info p {
+    margin-bottom: 0.65rem;
+}
+
+.contact-info a {
+    color: #2c5aa0;
+}
+
+/* ──────────────────────────────────────
+   FOOTER
+   ────────────────────────────────────── */
+.footer {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 30px 40px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.footer p {
+    color: #ecf0f1;
+    margin-bottom: 0;
+}
+
+/* ──────────────────────────────────────
+   RESPONSIVE DESIGN - TABLETS
+   ────────────────────────────────────── */
+@media (max-width: 768px) {
+    .main-container {
+        margin-left: 0;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: -240px;
+        transition: left 0.3s ease;
+        height: 100vh;
+        top: 0;
+    }
+
+    .sidebar.active {
+        left: 0;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar-header {
+        display: flex;
+    }
+
+    .sidebar-close {
+        display: block;
+    }
+
+    .mobile-header {
+        display: flex;
+    }
+
+    .sidebar-toggle {
+        display: block;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+    }
+
+    .hero {
+        padding: 40px 0;
+        text-align: center;
+    }
+
+    .hero-name {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-title {
+        font-size: 1rem;
+    }
+
+    .hero-buttons {
+        gap: 0.75rem;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    section {
+        padding: 40px 0;
+    }
+
+    .section-content {
+        padding: 0 20px;
+    }
+
+    .skill-category,
+    .project {
+        margin-bottom: 1.75rem;
+    }
+
+    .footer {
+        padding: 20px;
+    }
+
+    .mobile-title {
+        font-size: 1.1rem;
+    }
+
+    .skill-category h3,
+    .project h3 {
+        font-size: 1rem;
+    }
+}
+
+/* ──────────────────────────────────────
+   RESPONSIVE DESIGN - MOBILE
+   ────────────────────────────────────── */
+@media (max-width: 480px) {
+    .section-content {
+        padding: 0 15px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+    }
+
+    h3 {
+        font-size: 1rem;
+    }
+
+    .hero {
+        padding: 40px 15px;
+    }
+
+    .hero-name {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-title {
+        font-size: 1rem;
+    }
+
+    .hero-location,
+    .hero-email {
+        font-size: 0.9rem;
+    }
+
+    .hero-buttons {
+        gap: 0.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .btn {
+        padding: 10px 16px;
+        font-size: 0.95rem;
+        min-width: 100%;
+    }
+
+    .btn-secondary {
+        padding: 8px 14px;
+        font-size: 0.9rem;
+    }
+
+    p {
+        font-size: 0.95rem;
+    }
+
+    li {
+        font-size: 0.95rem;
+    }
+
+    section {
+        padding: 30px 0;
+    }
+
+    .project,
+    .skill-category {
+        margin-bottom: 1.5rem;
+    }
+
+    .mobile-title {
+        font-size: 1.1rem;
+    }
+
+    .footer {
+        padding: 20px 15px;
+        font-size: 0.9rem;
+    }
+
+    .sidebar-header h2 {
+        font-size: 1.1rem;
+    }
+
+    .sidebar {
+        width: 100%;
+        left: -100%;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+}
