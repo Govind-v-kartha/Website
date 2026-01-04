@@ -11,7 +11,7 @@ export default function Footer() {
     },
     {
       name: 'LinkedIn',
-      href: 'https://linkedin.com',
+      href: 'https://www.linkedin.com/in/govind-v-kartha-3816a2322',
       icon: Linkedin,
     },
     {

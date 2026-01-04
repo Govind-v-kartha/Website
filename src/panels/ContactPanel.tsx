@@ -278,7 +278,7 @@ export default function ContactPanel() {
               </motion.a>
 
               <motion.a
-                href="https://linkedin.com/in/govind-v-kartha"
+                href="https://www.linkedin.com/in/govind-v-kartha-3816a2322"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ x: 4 }}
@@ -290,7 +290,7 @@ export default function ContactPanel() {
                 <div>
                   <p className="text-sm text-slate-600">LinkedIn</p>
                   <p className="font-semibold text-blue-600 group-hover:text-blue-700">
-                    linkedin.com/in/govind-v-kartha
+                    linkedin.com/in/govind-v-kartha-3816a2322
                   </p>
                 </div>
               </motion.a>

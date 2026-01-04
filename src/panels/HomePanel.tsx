@@ -121,7 +121,7 @@ export default function HomePanel() {
               variant="secondary"
               size="lg"
               icon={Linkedin}
-              onClick={() => window.open('https://linkedin.com/in/govind-v-kartha', '_blank')}
+              onClick={() => window.open('https://www.linkedin.com/in/govind-v-kartha-3816a2322', '_blank')}
             >
               LinkedIn Profile
             </Button>

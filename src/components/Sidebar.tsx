@@ -157,7 +157,7 @@ export default function Sidebar({ activePanel, onPanelChange }: SidebarProps) {
               <ExternalLink size={12} className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
             </a>
             <a
-              href="https://linkedin.com/in/govind-v-kartha"
+              href="https://www.linkedin.com/in/govind-v-kartha-3816a2322"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-sm text-slate-600 hover:text-blue-600 transition-colors group"
