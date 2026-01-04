@@ -19,6 +19,20 @@ const PROJECTS = [
     environment: 'Kali Linux, Metasploitable, Wazuh, Suricata, Wireshark, VirtualBox',
   },
   {
+    icon: Microscope,
+    title: '🔍 OSINT-Based Attack Preparation',
+    description:
+      'Conducted passive open-source intelligence gathering against a simulated organization to identify public-facing assets, exposed information, and potential attack entry points. Focused on target profiling and attack surface mapping without active scanning.',
+    keyFocus: [
+      'Passive reconnaissance and intelligence gathering',
+      'Target profiling and asset discovery',
+      'Attack surface mapping',
+      'Exposed information identification',
+      'Potential vulnerability assessment',
+    ],
+    environment: 'OSINT, theHarvester, Amass, Shodan',
+  },
+  {
     icon: Lock,
     title: '🔐 QMail – Secure Email Communication Prototype',
     description:

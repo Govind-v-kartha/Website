@@ -40,7 +40,7 @@ export default function HomePanel() {
             variants={itemVariants}
           >
             <motion.img
-              src="/GVK.jpg"
+              src="/profile.jpg"
               alt="Govind V Kartha"
               className="w-32 h-32 rounded-2xl object-cover shadow-lg border-2 border-slate-200"
               whileHover={{ scale: 1.05, borderColor: '#3b82f6' }}

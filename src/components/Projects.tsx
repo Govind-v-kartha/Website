@@ -55,6 +55,46 @@ export default function Projects() {
         {/* Project 2 */}
         <div className="mb-8 pb-8 border-b border-slate-200 last:border-b-0 last:mb-0 last:pb-0">
           <h3 className="text-xl font-semibold text-slate-900 mb-3">
+            OSINT-Based Attack Preparation
+          </h3>
+          <p className="text-slate-700 mb-4">
+            Conducted passive open-source intelligence gathering against a simulated organization to identify public-facing assets, exposed information, and potential attack entry points. Focused on target profiling and attack surface mapping without active scanning.
+          </p>
+
+          <div className="space-y-4">
+            <div>
+              <p className="font-semibold text-slate-900 mb-2">Methodologies:</p>
+              <ul className="space-y-2 ml-6">
+                <li className="text-slate-700 relative before:content-['•'] before:absolute before:left-[-1.5rem] before:text-slate-500 before:font-bold">
+                  Passive reconnaissance and intelligence gathering
+                </li>
+                <li className="text-slate-700 relative before:content-['•'] before:absolute before:left-[-1.5rem] before:text-slate-500 before:font-bold">
+                  Target profiling and asset discovery
+                </li>
+                <li className="text-slate-700 relative before:content-['•'] before:absolute before:left-[-1.5rem] before:text-slate-500 before:font-bold">
+                  Attack surface mapping
+                </li>
+                <li className="text-slate-700 relative before:content-['•'] before:absolute before:left-[-1.5rem] before:text-slate-500 before:font-bold">
+                  Exposed information identification
+                </li>
+                <li className="text-slate-700 relative before:content-['•'] before:absolute before:left-[-1.5rem] before:text-slate-500 before:font-bold">
+                  Potential vulnerability assessment
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <p className="font-semibold text-slate-900 mb-2">Tools & Techniques:</p>
+              <p className="text-slate-700">
+                OSINT, theHarvester, Amass, Shodan
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Project 3 */}
+        <div className="mb-8 pb-8 border-b border-slate-200 last:border-b-0 last:mb-0 last:pb-0">
+          <h3 className="text-xl font-semibold text-slate-900 mb-3">
             QMail – Secure Email Communication Prototype
           </h3>
           <p className="text-slate-700 mb-4">
@@ -88,7 +128,7 @@ export default function Projects() {
           </a>
         </div>
 
-        {/* Project 3 */}
+        {/* Project 4 */}
         <div>
           <h3 className="text-xl font-semibold text-slate-900 mb-3">
             MyShark – Network Traffic Analysis Tool
