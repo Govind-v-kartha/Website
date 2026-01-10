@@ -107,41 +107,6 @@ export default function EducationPanel() {
             </div>
           </motion.div>
 
-          {/* Certifications Section */}
-          <motion.div
-            variants={itemVariants}
-            className="bg-white rounded-lg border border-slate-200 overflow-hidden hover:border-blue-300 hover:shadow-lg transition-all duration-300"
-          >
-            <div className="bg-gradient-to-r from-amber-50 to-orange-50 px-6 py-5 border-b border-slate-200">
-              <div className="flex items-center gap-3">
-                <div className="p-2.5 bg-amber-100 rounded-lg">
-                  <Star className="w-5 h-5 text-amber-600" />
-                </div>
-                <h2 className="text-xl font-semibold text-slate-900">Certifications</h2>
-              </div>
-            </div>
-
-            <div className="px-6 py-6">
-              <ul className="space-y-4">
-                {CERTIFICATIONS.map((cert, idx) => {
-                  const Icon = cert.icon
-                  return (
-                    <motion.li
-                      key={idx}
-                      variants={itemVariants}
-                      className="flex items-start gap-3"
-                    >
-                      <div className="p-2 bg-amber-50 rounded-lg flex-shrink-0 mt-0.5">
-                        <Icon className="w-4 h-4 text-amber-600" />
-                      </div>
-                      <span className="text-slate-700 pt-0.5">{cert.title}</span>
-                    </motion.li>
-                  )
-                })}
-              </ul>
-            </div>
-          </motion.div>
-
           {/* Achievements Section */}
           <motion.div
             variants={itemVariants}
@@ -170,6 +135,41 @@ export default function EducationPanel() {
                         <Icon className="w-4 h-4 text-yellow-600" />
                       </div>
                       <span className="text-slate-700 pt-0.5">{achievement.title}</span>
+                    </motion.li>
+                  )
+                })}
+              </ul>
+            </div>
+          </motion.div>
+
+          {/* Certifications Section */}
+          <motion.div
+            variants={itemVariants}
+            className="bg-white rounded-lg border border-slate-200 overflow-hidden hover:border-blue-300 hover:shadow-lg transition-all duration-300"
+          >
+            <div className="bg-gradient-to-r from-amber-50 to-orange-50 px-6 py-5 border-b border-slate-200">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 bg-amber-100 rounded-lg">
+                  <Star className="w-5 h-5 text-amber-600" />
+                </div>
+                <h2 className="text-xl font-semibold text-slate-900">Certifications</h2>
+              </div>
+            </div>
+
+            <div className="px-6 py-6">
+              <ul className="space-y-4">
+                {CERTIFICATIONS.map((cert, idx) => {
+                  const Icon = cert.icon
+                  return (
+                    <motion.li
+                      key={idx}
+                      variants={itemVariants}
+                      className="flex items-start gap-3"
+                    >
+                      <div className="p-2 bg-amber-50 rounded-lg flex-shrink-0 mt-0.5">
+                        <Icon className="w-4 h-4 text-amber-600" />
+                      </div>
+                      <span className="text-slate-700 pt-0.5">{cert.title}</span>
                     </motion.li>
                   )
                 })}
