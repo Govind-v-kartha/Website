@@ -52,7 +52,7 @@ const PROJECTS = [
       'Built a Python-based packet capture and traffic analysis tool for inspecting live network traffic and identifying suspicious communication patterns.',
     keyFocus: ['Packet capture', 'Protocol analysis', 'Security investigation support'],
     environment: null,
-    github: 'https://github.com/Govind-v-kartha/MyShark',
+    github: 'https://myshark.vercel.app/',
   },
 ]
 
