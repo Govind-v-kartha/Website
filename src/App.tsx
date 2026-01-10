@@ -30,7 +30,7 @@ export default function App() {
   return (
     <div className="h-screen bg-white flex flex-col">
       {/* Top Bar */}
-      <TopBar activePanel={activePanel} />
+      <TopBar activePanel={activePanel} onPanelChange={setActivePanel} />
 
       {/* Main Layout */}
       <div className="flex flex-1 overflow-hidden">

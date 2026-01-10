@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 
 interface TopBarProps {
   activePanel: string;
+  onPanelChange?: (panel: 'home' | 'profile' | 'skills' | 'projects' | 'education' | 'contact') => void;
 }
 
 const panelTitles: Record<string, string> = {
@@ -14,7 +15,7 @@ const panelTitles: Record<string, string> = {
   contact: 'Get In Touch'
 };
 
-export const TopBar: React.FC<TopBarProps> = ({ activePanel }) => {
+export const TopBar: React.FC<TopBarProps> = ({ activePanel, onPanelChange }) => {
   return (
     <motion.div
       className="fixed top-0 left-0 right-0 h-16 bg-white/80 backdrop-blur-xl border-b border-slate-200/50 shadow-sm z-40"
@@ -24,14 +25,21 @@ export const TopBar: React.FC<TopBarProps> = ({ activePanel }) => {
     >
       <div className="flex items-center justify-between h-full px-8">
         {/* Left: Logo/Name */}
-        <motion.div
-          className="font-semibold tracking-tight text-slate-900 text-base"
+        <motion.a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            if (onPanelChange) {
+              onPanelChange('contact');
+            }
+          }}
+          className="font-semibold tracking-tight text-slate-900 text-base cursor-pointer hover:text-blue-600 transition-colors"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1, duration: 0.3 }}
         >
           GOVIND V KARTHA
-        </motion.div>
+        </motion.a>
 
         {/* Center: Panel Title */}
         <motion.div
