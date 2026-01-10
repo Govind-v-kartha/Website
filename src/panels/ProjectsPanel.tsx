@@ -152,8 +152,17 @@ export default function ProjectsPanel() {
                       whileTap={{ scale: 0.98 }}
                       className="inline-flex items-center gap-2 px-4 py-2.5 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-sm hover:shadow-md mt-2"
                     >
-                      <Github className="w-4 h-4" />
-                      {project.github.includes('myshark.vercel.app') ? 'Visit Live Website' : 'GitHub Repository'}
+                      {project.github.includes('myshark.vercel.app') ? (
+                        <>
+                          <span>🚀</span>
+                          Try Now
+                        </>
+                      ) : (
+                        <>
+                          <Github className="w-4 h-4" />
+                          GitHub Repository
+                        </>
+                      )}
                       <ExternalLink className="w-3.5 h-3.5" />
                     </motion.a>
                   )}
