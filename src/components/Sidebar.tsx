@@ -88,7 +88,17 @@ export default function Sidebar({ activePanel, onPanelChange }: SidebarProps) {
                 className="w-14 h-14 rounded-xl object-cover shadow-md hover:shadow-lg hover:scale-105 transition-all"
               />
               <div className="flex-1">
-                <p className="font-bold text-slate-900 text-sm leading-tight">Govind V Kartha</p>
+                <a 
+                  href="#" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onPanelChange('home' as const);
+                    setSidebarOpen(false);
+                  }}
+                  className="font-bold text-slate-900 text-sm leading-tight hover:text-blue-600 transition-colors"
+                >
+                  Govind V Kartha
+                </a>
               </div>
             </div>
             <p className="text-xs text-slate-600 leading-relaxed">
