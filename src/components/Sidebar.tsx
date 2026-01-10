@@ -73,7 +73,7 @@ export default function Sidebar({ activePanel, onPanelChange }: SidebarProps) {
           <motion.div
             className="mb-8 p-4 bg-gradient-to-br from-blue-50 to-slate-50 rounded-xl border border-blue-200/50 cursor-pointer hover:border-blue-300 hover:shadow-md transition-all"
             onClick={() => {
-              onPanelChange('home' as const);
+              onPanelChange('contact' as const);
               setSidebarOpen(false);
             }}
             initial={{ opacity: 0 }}
@@ -92,7 +92,7 @@ export default function Sidebar({ activePanel, onPanelChange }: SidebarProps) {
                   href="#" 
                   onClick={(e) => {
                     e.preventDefault();
-                    onPanelChange('home' as const);
+                    onPanelChange('contact' as const);
                     setSidebarOpen(false);
                   }}
                   className="font-bold text-slate-900 text-sm leading-tight hover:text-blue-600 transition-colors"
