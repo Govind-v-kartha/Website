@@ -54,7 +54,7 @@ export default function HomePanel({ onNavigate }: HomePanelProps) {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(circle at 22% 18%, rgba(56,189,248,0.14), transparent 32%), radial-gradient(circle at 78% 34%, rgba(16,185,129,0.12), transparent 28%)',
+            'radial-gradient(circle at 22% 18%, color-mix(in srgb, var(--accent) 32%, transparent), transparent 32%), radial-gradient(circle at 78% 34%, color-mix(in srgb, var(--focus) 24%, transparent), transparent 28%)',
         }}
         aria-hidden="true"
       />
@@ -69,9 +69,9 @@ export default function HomePanel({ onNavigate }: HomePanelProps) {
 
             <div>
               <h1 className="text-3xl sm:text-5xl font-bold text-white leading-tight text-balance">Hi, I'm Govind V Kartha</h1>
-              <p className="mt-3 text-xl sm:text-2xl font-semibold text-[#38BDF8] min-h-[2.2rem]">
+              <p className="mt-3 text-xl sm:text-2xl font-semibold text-[var(--accent)] min-h-[2.2rem]">
                 {typedRole}
-                <span className="text-[#38BDF8]/70">|</span>
+                <span className="text-[color-mix(in_srgb,var(--accent)_70%,transparent)]">|</span>
               </p>
             </div>
 
@@ -84,7 +84,7 @@ export default function HomePanel({ onNavigate }: HomePanelProps) {
               <button
                 type="button"
                 onClick={() => onNavigate('contact')}
-                className="focus-ring inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#38BDF8] text-white font-semibold hover:bg-[#0EA5E9] glow-accent transition-all duration-300"
+                className="focus-ring inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[var(--accent)] text-white font-semibold hover:bg-[var(--accent-hover)] glow-accent transition-all duration-300"
               >
                 <Mail size={18} />
                 Let's Connect
@@ -94,7 +94,7 @@ export default function HomePanel({ onNavigate }: HomePanelProps) {
                 href="/cv/Govind_V_Kartha_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="focus-ring inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[#38BDF899] text-[#38BDF8] hover:bg-[#38BDF81A] transition-all duration-300"
+                className="focus-ring inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[var(--accent-soft-border)] text-[var(--accent)] hover:bg-[var(--accent-soft)] transition-all duration-300"
               >
                 <Mail size={18} />
                 View Resume
@@ -103,7 +103,7 @@ export default function HomePanel({ onNavigate }: HomePanelProps) {
               <a
                 href="/cv/Govind_V_Kartha_Resume.pdf"
                 download="Govind_V_Kartha_Resume.pdf"
-                className="focus-ring inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[#1E293B] text-slate-300 hover:text-white hover:border-[#38BDF866] transition-all duration-300"
+                className="focus-ring inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[var(--border)] text-slate-300 hover:text-white hover:border-[var(--accent-soft-border)] transition-all duration-300"
               >
                 <Download size={18} />
                 Download Resume
@@ -112,7 +112,7 @@ export default function HomePanel({ onNavigate }: HomePanelProps) {
               <button
                 type="button"
                 onClick={() => onNavigate('projects')}
-                className="focus-ring inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[#1E293B] text-slate-300 hover:text-white hover:border-[#38BDF866] transition-all duration-300"
+                className="focus-ring inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[var(--border)] text-slate-300 hover:text-white hover:border-[var(--accent-soft-border)] transition-all duration-300"
               >
                 <Sparkles size={18} />
                 View Projects
@@ -124,7 +124,7 @@ export default function HomePanel({ onNavigate }: HomePanelProps) {
                 href="https://github.com/Govind-v-kartha"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="focus-ring h-10 w-10 rounded-lg border border-[#1E293B] bg-[#0B1020]/80 text-slate-300 hover:text-[#38BDF8] hover:border-[#38BDF866] inline-flex items-center justify-center transition-all duration-300"
+                className="focus-ring h-10 w-10 rounded-lg border border-[var(--border)] bg-[color-mix(in_srgb,var(--bg-elevated)_88%,transparent)] text-slate-300 hover:text-[var(--accent)] hover:border-[var(--accent-soft-border)] inline-flex items-center justify-center transition-all duration-300"
                 aria-label="GitHub"
               >
                 <Github size={18} />
@@ -133,7 +133,7 @@ export default function HomePanel({ onNavigate }: HomePanelProps) {
                 href="https://www.linkedin.com/in/govind-v-kartha"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="focus-ring h-10 w-10 rounded-lg border border-[#1E293B] bg-[#0B1020]/80 text-slate-300 hover:text-[#38BDF8] hover:border-[#38BDF866] inline-flex items-center justify-center transition-all duration-300"
+                className="focus-ring h-10 w-10 rounded-lg border border-[var(--border)] bg-[color-mix(in_srgb,var(--bg-elevated)_88%,transparent)] text-slate-300 hover:text-[var(--accent)] hover:border-[var(--accent-soft-border)] inline-flex items-center justify-center transition-all duration-300"
                 aria-label="LinkedIn"
               >
                 <Linkedin size={18} />
@@ -144,12 +144,12 @@ export default function HomePanel({ onNavigate }: HomePanelProps) {
           <div className="relative max-w-sm mx-auto w-full">
             <div className="relative aspect-square">
               <div
-                className="absolute inset-0 rounded-full border-2 border-dashed border-[#38BDF880]"
+                className="absolute inset-0 rounded-full border-2 border-dashed border-[var(--accent-soft-border)]"
                 style={{ animation: 'spin-ring 12s linear infinite' }}
                 aria-hidden="true"
               />
 
-              <div className="absolute inset-[14px] rounded-full border-[3px] border-[#38BDF8] overflow-hidden bg-[#0B1020]">
+              <div className="absolute inset-[14px] rounded-full border-[3px] border-[var(--accent)] overflow-hidden bg-[var(--bg-elevated)]">
                 {isPhotoLoaded ? (
                   <img
                     src="/profile.jpg"

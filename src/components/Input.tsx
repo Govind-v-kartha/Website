@@ -24,12 +24,12 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <input
             ref={ref}
             className={`
-              w-full h-11 border border-[#1E293B] rounded-lg px-4 py-2.5
-              text-sm text-slate-100 placeholder-slate-500 bg-[#0B1020]/90
+              w-full h-11 border border-[var(--border)] rounded-lg px-4 py-2.5
+              text-sm text-slate-100 placeholder-slate-500 bg-[color-mix(in_srgb,var(--bg-elevated)_92%,transparent)]
               transition-all duration-300
-              focus:outline-none focus:border-[#38BDF8] focus:ring-2 focus:ring-[#38BDF833]
-              hover:border-[#38BDF866] hover:bg-[#111827]
-              disabled:bg-[#0B1020] disabled:text-slate-500 disabled:cursor-not-allowed
+              focus:outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft-border)]
+              hover:border-[var(--accent-soft-border)] hover:bg-[var(--surface)]
+              disabled:bg-[var(--bg-elevated)] disabled:text-slate-500 disabled:cursor-not-allowed
               focus-ring
               ${icon ? 'pl-11' : ''}
               ${error ? 'border-red-400 focus:border-red-400 focus:ring-red-500/20' : ''}
@@ -75,12 +75,12 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
         <motion.textarea
           ref={ref}
           className={`
-            w-full min-h-32 border border-[#1E293B] rounded-lg px-4 py-3
-            text-sm text-slate-100 placeholder-slate-500 bg-[#0B1020]/90
+            w-full min-h-32 border border-[var(--border)] rounded-lg px-4 py-3
+            text-sm text-slate-100 placeholder-slate-500 bg-[color-mix(in_srgb,var(--bg-elevated)_92%,transparent)]
             transition-all duration-300 resize-none
-            focus:outline-none focus:border-[#38BDF8] focus:ring-2 focus:ring-[#38BDF833]
-            hover:border-[#38BDF866] hover:bg-[#111827]
-            disabled:bg-[#0B1020] disabled:text-slate-500 disabled:cursor-not-allowed
+            focus:outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft-border)]
+            hover:border-[var(--accent-soft-border)] hover:bg-[var(--surface)]
+            disabled:bg-[var(--bg-elevated)] disabled:text-slate-500 disabled:cursor-not-allowed
             focus-ring
             ${error ? 'border-red-400 focus:border-red-400 focus:ring-red-500/20' : ''}
             ${className}

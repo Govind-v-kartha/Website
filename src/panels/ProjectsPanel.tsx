@@ -122,8 +122,8 @@ export default function ProjectsPanel() {
                 onClick={() => setActiveFilter(filter)}
                 className={`focus-ring px-3 py-1.5 rounded-md text-sm border transition-all duration-300 ${
                   isActive
-                    ? 'bg-[#38BDF81A] text-white border-[#38BDF866]'
-                    : 'bg-[#0B1020]/70 text-slate-300 border-[#1E293B] hover:text-white hover:border-[#38BDF866]'
+                    ? 'bg-[var(--accent-soft)] text-white border-[var(--accent-soft-border)]'
+                    : 'bg-[color-mix(in_srgb,var(--bg-elevated)_86%,transparent)] text-slate-300 border-[var(--border)] hover:text-white hover:border-[var(--accent-soft-border)]'
                 }`}
               >
                 {filter}
@@ -140,7 +140,7 @@ export default function ProjectsPanel() {
 
             return (
               <article key={project.title} className="section-card overflow-hidden transition-all duration-300">
-                <div className="relative h-44 border-b border-[#1E293B]">
+                <div className="relative h-44 border-b border-[var(--border)]">
                   {isImageVisible ? (
                     <img
                       src={project.image || ''}
@@ -150,16 +150,16 @@ export default function ProjectsPanel() {
                     />
                   ) : (
                     <div className="placeholder-gradient h-full w-full flex items-center justify-center">
-                      <Icon className="w-8 h-8 text-[#38BDF8]" />
+                      <Icon className="w-8 h-8 text-[var(--accent)]" />
                     </div>
                   )}
 
-                  <span className="absolute top-3 left-3 text-xs px-2 py-1 rounded bg-[#0B1020]/85 border border-[#1E293B] text-slate-200">
+                  <span className="absolute top-3 left-3 text-xs px-2 py-1 rounded bg-[color-mix(in_srgb,var(--bg-elevated)_92%,transparent)] border border-[var(--border)] text-slate-200">
                     {project.category}
                   </span>
 
                   {showLogoCue && (
-                    <div className="absolute top-3 right-3 rounded bg-[#0B1020]/85 border border-[#1E293B] px-2 py-1">
+                    <div className="absolute top-3 right-3 rounded bg-[color-mix(in_srgb,var(--bg-elevated)_92%,transparent)] border border-[var(--border)] px-2 py-1">
                       <img
                         src={project.logoSrc || ''}
                         alt={project.logoAlt ?? 'Project platform logo'}

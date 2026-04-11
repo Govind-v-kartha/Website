@@ -33,15 +33,15 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
     <header
       className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${
         isScrolled
-          ? 'backdrop-blur-md bg-black/35 border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.35)]'
-          : 'backdrop-blur-md bg-black/20 border-white/10'
+          ? 'backdrop-blur-md bg-[#0F1417]/88 border-[var(--border)] shadow-[0_10px_30px_rgba(0,0,0,0.35)]'
+          : 'backdrop-blur-md bg-[#0F1417]/72 border-[color-mix(in_srgb,var(--border)_80%,transparent)]'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         <button
           type="button"
           onClick={() => onNavigate('home')}
-          className="focus-ring text-[#38BDF8] font-bold tracking-tight text-base sm:text-lg"
+          className="focus-ring text-[var(--accent)] font-bold tracking-tight text-base sm:text-lg"
         >
           Govind V Kartha
         </button>
@@ -57,7 +57,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
                 onClick={() => onNavigate(item.id)}
                 className={`focus-ring px-3 py-1.5 rounded-md text-sm border transition-all duration-300 ${
                   isActive
-                    ? 'text-white bg-[#38BDF81A] border-[#38BDF866]'
+                    ? 'text-white bg-[var(--accent-soft)] border-[var(--accent-soft-border)]'
                     : 'text-slate-300 border-transparent hover:text-white hover:bg-white/5'
                 }`}
                 aria-current={isActive ? 'page' : undefined}
@@ -71,7 +71,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
         <button
           type="button"
           onClick={() => setMobileOpen((prev) => !prev)}
-          className="focus-ring lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-md border border-white/20 text-slate-200 hover:text-white hover:border-[#38BDF866] transition-all duration-300"
+          className="focus-ring lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-md border border-[var(--border)] text-slate-200 hover:text-white hover:border-[var(--accent-soft-border)] transition-all duration-300"
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={mobileOpen}
         >
@@ -80,7 +80,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
       </div>
 
       {mobileOpen && (
-        <div className="lg:hidden border-t border-white/10 bg-[#0B1020]/95 backdrop-blur-xl">
+        <div className="lg:hidden border-t border-[var(--border)] bg-[color-mix(in_srgb,var(--bg-elevated)_94%,transparent)] backdrop-blur-xl">
           <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-col gap-1" aria-label="Mobile primary">
             {NAV_ITEMS.map((item) => {
               const isActive = activeSection === item.id
@@ -95,7 +95,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
                   }}
                   className={`focus-ring text-left px-3 py-2 rounded-md text-sm border transition-all duration-300 ${
                     isActive
-                      ? 'text-white bg-[#38BDF81A] border-[#38BDF866]'
+                      ? 'text-white bg-[var(--accent-soft)] border-[var(--accent-soft-border)]'
                       : 'text-slate-300 border-transparent hover:text-white hover:bg-white/5'
                   }`}
                 >

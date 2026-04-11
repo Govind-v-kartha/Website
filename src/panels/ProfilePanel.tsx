@@ -9,6 +9,7 @@ const COUNTERS = [
 ]
 
 const INTERESTS = ['Offensive Security', 'Detection Analysis', 'Digital Forensics', 'Quantum Security', 'Open Source Security']
+const HOBBIES = ['Music', 'Travel', 'Sports', 'Movies']
 
 export default function ProfilePanel() {
   const [imageVisible, setImageVisible] = useState(true)
@@ -61,7 +62,7 @@ export default function ProfilePanel() {
         <div className="panel-content">
           <div className="grid gap-6 lg:grid-cols-[0.9fr,1.1fr] items-start">
             <div className="section-card section-card-content space-y-4">
-              <div className="overflow-hidden rounded-xl border border-[#1E293B] bg-[#0B1020] aspect-square">
+              <div className="overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--bg-elevated)] aspect-square">
                 {imageVisible ? (
                   <img
                     src="/profile.jpg"
@@ -78,16 +79,16 @@ export default function ProfilePanel() {
 
               <div className="grid gap-2 text-sm text-slate-300">
                 <p className="inline-flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-[#38BDF8]" /> Kerala, India
+                  <MapPin className="w-4 h-4 text-[var(--accent)]" /> Kerala, India
                 </p>
                 <p className="inline-flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-[#38BDF8]" /> knvgovind@gmail.com
+                  <Mail className="w-4 h-4 text-[var(--accent)]" /> knvgovind@gmail.com
                 </p>
               </div>
             </div>
 
             <div className="section-card section-card-content space-y-5">
-              <div className="inline-flex items-center gap-2 pb-1 border-b border-[#38BDF866]">
+              <div className="inline-flex items-center gap-2 pb-1 border-b border-[var(--accent-soft-border)]">
                 <h2 className="text-2xl font-semibold text-white">Cybersecurity Graduate (Entry-Level)</h2>
               </div>
 
@@ -119,6 +120,17 @@ export default function ProfilePanel() {
                   ))}
                 </div>
               </div>
+
+              <div>
+                <p className="section-label mb-2">Hobbies</p>
+                <div className="flex flex-wrap gap-2">
+                  {HOBBIES.map((hobby) => (
+                    <span key={hobby} className="meta-chip">
+                      {hobby}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -132,7 +144,7 @@ export default function ProfilePanel() {
               return (
                 <div key={counter.label} className="section-card section-card-content text-center space-y-2">
                   <div className="mx-auto icon-accent w-fit">
-                    <Icon className="w-4 h-4 text-[#38BDF8]" />
+                    <Icon className="w-4 h-4 text-[var(--accent)]" />
                   </div>
                   <p className="text-2xl font-semibold text-white">
                     {counts[index]}

@@ -89,11 +89,11 @@ export default function ContactPanel() {
 
             <div className="space-y-2.5 text-sm text-slate-300">
               <div className="flex items-center gap-2.5">
-                <MapPin className="w-4 h-4 text-[#38BDF8]" />
+                <MapPin className="w-4 h-4 text-[var(--accent)]" />
                 <span>Kerala, India</span>
               </div>
               <a href="mailto:knvgovind@gmail.com" className="focus-ring flex items-center gap-2.5 hover:text-white transition-colors duration-300">
-                <Mail className="w-4 h-4 text-[#38BDF8]" />
+                <Mail className="w-4 h-4 text-[var(--accent)]" />
                 <span>knvgovind@gmail.com</span>
               </a>
               <a
@@ -102,7 +102,7 @@ export default function ContactPanel() {
                 rel="noopener noreferrer"
                 className="focus-ring flex items-center gap-2.5 hover:text-white transition-colors duration-300"
               >
-                <Linkedin className="w-4 h-4 text-[#38BDF8]" />
+                <Linkedin className="w-4 h-4 text-[var(--accent)]" />
                 <span>linkedin.com/in/govind-v-kartha</span>
               </a>
               <a
@@ -111,7 +111,7 @@ export default function ContactPanel() {
                 rel="noopener noreferrer"
                 className="focus-ring flex items-center gap-2.5 hover:text-white transition-colors duration-300"
               >
-                <Github className="w-4 h-4 text-[#38BDF8]" />
+                <Github className="w-4 h-4 text-[var(--accent)]" />
                 <span>github.com/Govind-v-kartha</span>
               </a>
             </div>
@@ -158,7 +158,7 @@ export default function ContactPanel() {
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className="focus-ring w-full h-11 px-3.5 border border-[#1E293B] rounded-lg bg-[#0B1020]/90 text-sm text-slate-100 transition-all hover:border-[#38BDF866] focus:outline-none"
+                  className="focus-ring w-full h-11 px-3.5 border border-[var(--border)] rounded-lg bg-[color-mix(in_srgb,var(--bg-elevated)_92%,transparent)] text-sm text-slate-100 transition-all hover:border-[var(--accent-soft-border)] focus:outline-none"
                 >
                   <option value="Role or Internship Opportunity">Role or Internship Opportunity</option>
                   <option value="Project Collaboration">Project Collaboration</option>

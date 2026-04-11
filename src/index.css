@@ -4,6 +4,23 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg: #0f1417;
+  --bg-elevated: #131a1f;
+  --surface: #1a232b;
+  --surface-2: #22303a;
+  --border: #2e3a44;
+  --text: #e6edf3;
+  --text-muted: #9fb0bd;
+  --accent: #14b8a6;
+  --accent-hover: #0f9d8e;
+  --accent-active: #0b8e82;
+  --accent-soft: rgba(20, 184, 166, 0.16);
+  --accent-soft-border: rgba(20, 184, 166, 0.35);
+  --focus: #2dd4bf;
+  --accent-glow: rgba(20, 184, 166, 0.28);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -17,11 +34,11 @@ html {
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   line-height: 1.6;
-  color: #ffffff;
+  color: var(--text);
   background:
-    radial-gradient(circle at 12% 12%, rgba(0, 180, 255, 0.12), transparent 30%),
-    radial-gradient(circle at 88% 22%, rgba(0, 144, 204, 0.12), transparent 34%),
-    linear-gradient(180deg, #0a0f1e 0%, #0d1526 100%);
+    radial-gradient(circle at 12% 12%, rgba(20, 184, 166, 0.12), transparent 30%),
+    radial-gradient(circle at 88% 22%, rgba(45, 212, 191, 0.08), transparent 34%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-elevated) 100%);
   min-height: 100vh;
   @apply antialiased;
 }
@@ -41,36 +58,48 @@ h6 {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0f1e;
+  background: var(--bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #35444f;
   border-radius: 999px;
-  border: 2px solid #0a0f1e;
+  border: 2px solid var(--bg);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #435662;
 }
 
 * {
-  scrollbar-color: #1e293b #0a0f1e;
+  scrollbar-color: #35444f var(--bg);
   scrollbar-width: thin;
 }
 
 @layer components {
   .focus-ring {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38BDF8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B1020];
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+    --tw-ring-color: var(--focus);
+    --tw-ring-offset-color: var(--bg);
   }
 
   .panel-shell {
-    @apply relative rounded-xl border border-[#1E293B] bg-[#111827]/85 backdrop-blur-sm overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.4)];
+    @apply relative rounded-xl overflow-hidden;
+    border: 1px solid var(--border);
+    background: color-mix(in srgb, var(--surface) 84%, transparent);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.38);
     transition: all 0.3s ease;
   }
 
   .panel-header {
-    @apply px-5 sm:px-7 py-5 border-b border-[#1E293B] bg-gradient-to-r from-[#101A30]/95 via-[#111827]/90 to-[#101A30]/95;
+    @apply px-5 sm:px-7 py-5 border-b;
+    border-color: var(--border);
+    background: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--bg-elevated) 95%, transparent),
+      color-mix(in srgb, var(--surface) 88%, transparent),
+      color-mix(in srgb, var(--bg-elevated) 95%, transparent)
+    );
   }
 
   .panel-header-row {
@@ -78,7 +107,11 @@ h6 {
   }
 
   .panel-header-icon {
-    @apply p-2.5 rounded-lg border border-[#38BDF833] bg-[#38BDF81A] text-[#38BDF8] shadow-[0_0_24px_rgba(0,180,255,0.25)];
+    @apply p-2.5 rounded-lg;
+    border: 1px solid var(--accent-soft-border);
+    background: var(--accent-soft);
+    color: var(--accent);
+    box-shadow: 0 0 24px rgba(20, 184, 166, 0.2);
   }
 
   .panel-title {
@@ -86,7 +119,8 @@ h6 {
   }
 
   .panel-subtitle {
-    @apply mt-2 text-sm text-slate-400;
+    @apply mt-2 text-sm;
+    color: var(--text-muted);
   }
 
   .panel-content {
@@ -94,18 +128,22 @@ h6 {
   }
 
   .section-card {
-    @apply rounded-xl border border-[#1E293B] bg-[#101A30]/75;
+    @apply rounded-xl border;
+    border-color: var(--border);
+    background: color-mix(in srgb, var(--bg-elevated) 78%, transparent);
     transition: all 0.3s ease;
   }
 
   .section-card:hover {
-    border-color: rgba(0, 180, 255, 0.5);
-    box-shadow: 0 18px 40px rgba(0, 180, 255, 0.12);
+    border-color: color-mix(in srgb, var(--accent) 52%, var(--border));
+    box-shadow: 0 18px 40px rgba(20, 184, 166, 0.12);
     transform: translateY(-2px);
   }
 
   .section-header {
-    @apply px-5 sm:px-6 py-4 border-b border-[#1E293B] bg-[#0B1020]/70;
+    @apply px-5 sm:px-6 py-4 border-b;
+    border-color: var(--border);
+    background: color-mix(in srgb, var(--bg) 74%, transparent);
   }
 
   .section-card-content {
@@ -117,33 +155,40 @@ h6 {
   }
 
   .section-label {
-    @apply text-xs uppercase tracking-wide font-semibold text-slate-400;
+    @apply text-xs uppercase tracking-wide font-semibold;
+    color: var(--text-muted);
   }
 
   .meta-chip {
-    @apply inline-flex items-center px-2.5 py-1 rounded-md border border-[#1E293B] bg-[#0B1020]/80 text-slate-300 text-xs font-medium;
+    @apply inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium border;
+    border-color: var(--border);
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    color: #d1dde6;
     transition: all 0.3s ease;
   }
 
   .meta-chip:hover {
-    border-color: rgba(0, 180, 255, 0.45);
+    border-color: color-mix(in srgb, var(--accent) 50%, var(--border));
     color: #ffffff;
   }
 
   .icon-accent {
-    @apply p-2 rounded-md border border-[#38BDF833] bg-[#38BDF81A];
+    @apply p-2 rounded-md border;
+    border-color: var(--accent-soft-border);
+    background: var(--accent-soft);
   }
 
   .grid-overlay {
     background-image:
-      linear-gradient(rgba(0, 180, 255, 0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 180, 255, 0.07) 1px, transparent 1px);
+      linear-gradient(rgba(20, 184, 166, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(20, 184, 166, 0.08) 1px, transparent 1px);
     background-size: 40px 40px;
   }
 
   .placeholder-gradient {
-    @apply rounded-xl border border-[#1E293B];
-    background: linear-gradient(135deg, #101A30 0%, #111827 48%, #0B1020 100%);
+    @apply rounded-xl border;
+    border-color: var(--border);
+    background: linear-gradient(135deg, #162028 0%, #1b2630 52%, #131b22 100%);
   }
 }
 
@@ -165,7 +210,7 @@ h6 {
   }
 
   .glow-accent {
-    box-shadow: 0 0 0 rgba(0, 180, 255, 0), 0 0 36px rgba(0, 180, 255, 0.22);
+    box-shadow: 0 0 0 rgba(20, 184, 166, 0), 0 0 34px var(--accent-glow);
   }
 }
 

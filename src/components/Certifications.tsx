@@ -93,9 +93,9 @@ export default function Certifications() {
 
             return (
               <article key={`${certificate.name}-${certificate.year}`} className="section-card overflow-hidden">
-                <div className="h-28 border-b border-[#1E293B]">
+                <div className="h-28 border-b border-[var(--border)]">
                   {showLogo ? (
-                    <div className="h-full w-full bg-[#0B1324] px-5 flex items-center justify-center">
+                    <div className="h-full w-full bg-[color-mix(in_srgb,var(--bg-elevated)_94%,transparent)] px-5 flex items-center justify-center">
                       <img
                         src={certificate.logoSrc || ''}
                         alt={certificate.logoAlt ?? `${certificate.issuer} logo`}
@@ -104,7 +104,7 @@ export default function Certifications() {
                       />
                     </div>
                   ) : (
-                    <div className="placeholder-gradient h-full w-full flex items-center justify-center text-[#38BDF8] font-semibold tracking-wide">
+                    <div className="placeholder-gradient h-full w-full flex items-center justify-center text-[var(--accent)] font-semibold tracking-wide">
                       {certificate.acronym}
                     </div>
                   )}
@@ -113,13 +113,13 @@ export default function Certifications() {
                 <div className="section-card-content space-y-1.5">
                   <h2 className="text-sm font-semibold text-white leading-snug">{certificate.name}</h2>
                   <p className="text-xs text-slate-400">{certificate.issuer}</p>
-                  <p className="text-xs text-[#38BDF8]">{certificate.year}</p>
+                  <p className="text-xs text-[var(--accent)]">{certificate.year}</p>
                   {certificate.url !== '#' && (
                     <a
                       href={certificate.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex mt-2 text-xs text-[#38BDF8] hover:text-white transition-colors duration-300"
+                      className="inline-flex mt-2 text-xs text-[var(--accent)] hover:text-white transition-colors duration-300"
                     >
                       View Certificate →
                     </a>

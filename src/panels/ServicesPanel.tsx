@@ -62,7 +62,7 @@ export default function ServicesPanel() {
             return (
               <article
                 key={service.title}
-                className="section-card section-card-content bg-[#111827]/85 backdrop-blur-sm hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(56,189,248,0.18)]"
+                className="section-card section-card-content bg-[color-mix(in_srgb,var(--surface)_80%,transparent)] backdrop-blur-sm hover:-translate-y-2 hover:shadow-[0_20px_45px_var(--accent-glow)]"
               >
                 <div className="icon-accent w-fit mb-4 transition-all duration-300">
                   <Icon className="w-5 h-5 text-slate-200" />

@@ -29,7 +29,7 @@ export default function Footer({ onNavigate }: FooterProps) {
 
   return (
     <>
-      <footer className="border-t border-[#38BDF833] bg-[#0B1020]/95 backdrop-blur">
+      <footer className="border-t border-[var(--accent-soft-border)] bg-[color-mix(in_srgb,var(--bg-elevated)_95%,transparent)] backdrop-blur">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid gap-6 md:grid-cols-3 items-start">
           <div>
             <h3 className="text-white font-semibold text-base">Govind V Kartha</h3>
@@ -59,7 +59,7 @@ export default function Footer({ onNavigate }: FooterProps) {
                 href="https://github.com/Govind-v-kartha"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="focus-ring h-9 w-9 rounded-md border border-[#1E293B] bg-[#101A30] text-slate-300 hover:text-[#38BDF8] hover:border-[#38BDF866] inline-flex items-center justify-center transition-all duration-300"
+                className="focus-ring h-9 w-9 rounded-md border border-[var(--border)] bg-[var(--surface)] text-slate-300 hover:text-[var(--accent)] hover:border-[var(--accent-soft-border)] inline-flex items-center justify-center transition-all duration-300"
                 aria-label="GitHub"
               >
                 <Github size={16} />
@@ -68,7 +68,7 @@ export default function Footer({ onNavigate }: FooterProps) {
                 href="https://www.linkedin.com/in/govind-v-kartha"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="focus-ring h-9 w-9 rounded-md border border-[#1E293B] bg-[#101A30] text-slate-300 hover:text-[#38BDF8] hover:border-[#38BDF866] inline-flex items-center justify-center transition-all duration-300"
+                className="focus-ring h-9 w-9 rounded-md border border-[var(--border)] bg-[var(--surface)] text-slate-300 hover:text-[var(--accent)] hover:border-[var(--accent-soft-border)] inline-flex items-center justify-center transition-all duration-300"
                 aria-label="LinkedIn"
               >
                 <Linkedin size={16} />
@@ -77,7 +77,7 @@ export default function Footer({ onNavigate }: FooterProps) {
           </div>
         </div>
 
-        <div className="border-t border-[#1E293B] py-3 px-4 sm:px-6 lg:px-8 text-center text-xs text-slate-500">
+        <div className="border-t border-[var(--border)] py-3 px-4 sm:px-6 lg:px-8 text-center text-xs text-slate-500">
           © {currentYear} Govind V Kartha. All rights reserved.
         </div>
       </footer>
@@ -86,7 +86,7 @@ export default function Footer({ onNavigate }: FooterProps) {
         <button
           type="button"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="focus-ring fixed bottom-6 right-6 z-40 h-11 w-11 rounded-full bg-[#38BDF8] text-white shadow-[0_0_24px_rgba(0,180,255,0.45)] hover:bg-[#0EA5E9] transition-all duration-300 inline-flex items-center justify-center"
+          className="focus-ring fixed bottom-6 right-6 z-40 h-11 w-11 rounded-full bg-[var(--accent)] text-white shadow-[0_0_24px_var(--accent-glow)] hover:bg-[var(--accent-hover)] transition-all duration-300 inline-flex items-center justify-center"
           aria-label="Scroll to top"
         >
           <ArrowUp size={18} />
