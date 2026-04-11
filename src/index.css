@@ -16,10 +16,14 @@ html {
 body {
   font-family: inherit;
   line-height: 1.6;
-  @apply bg-white text-slate-900;
+  color: #0f172a;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(59, 130, 246, 0.12), transparent 36%),
+    radial-gradient(circle at 88% -10%, rgba(30, 64, 175, 0.1), transparent 34%),
+    linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
+  @apply antialiased;
 }
 
-/* Premium scrollbar styling */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -30,88 +34,102 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d1d5db;
+  background: #cbd5e1;
   border-radius: 8px;
   border: 2px solid transparent;
   background-clip: padding-box;
-  transition: background 0.3s ease;
+  transition: background 0.2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+  background: #94a3b8;
   background-clip: padding-box;
   border: 2px solid transparent;
 }
 
-/* Firefox scrollbar */
 * {
-  scrollbar-color: #d1d5db transparent;
+  scrollbar-color: #cbd5e1 transparent;
   scrollbar-width: thin;
 }
 
-/* Smooth transitions */
 @layer components {
-  .transition-smooth {
-    @apply transition-all duration-200 ease-out;
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-100;
   }
-  
-  .blur-glass {
-    @apply backdrop-blur-xl bg-white/80;
+
+  .panel-shell {
+    @apply flex flex-col h-full bg-slate-50/85 backdrop-blur-sm;
   }
-  
-  .card-base {
-    @apply bg-white border border-slate-200 rounded-xl;
+
+  .panel-header {
+    @apply px-8 py-7 bg-slate-50/90 border-b border-slate-200/90 shadow-sm;
   }
-  
-  .card-hover {
-    @apply hover:shadow-lg hover:border-slate-300 hover:scale-105;
+
+  .panel-header-row {
+    @apply flex items-center gap-3;
+  }
+
+  .panel-header-icon {
+    @apply p-2.5 rounded-lg bg-slate-900 text-white shadow-sm;
+  }
+
+  .panel-title {
+    @apply text-3xl font-semibold tracking-tight text-slate-900;
+  }
+
+  .panel-subtitle {
+    @apply mt-2 text-sm text-slate-600;
+  }
+
+  .panel-content {
+    @apply flex-1 overflow-y-auto px-8 py-8;
+  }
+
+  .section-card {
+    @apply bg-slate-50/95 border border-slate-200/90 rounded-xl shadow-sm transition-all duration-200 hover:border-blue-200/90 hover:shadow-lg hover:bg-white;
+  }
+
+  .section-header {
+    @apply px-6 py-4 border-b border-slate-200/90 bg-gradient-to-r from-slate-100/95 to-slate-50/95;
+  }
+
+  .section-card-content {
+    @apply p-6;
+  }
+
+  .section-title {
+    @apply text-lg font-semibold text-slate-900;
+  }
+
+  .section-label {
+    @apply text-xs font-semibold uppercase tracking-wide text-slate-500;
+  }
+
+  .meta-chip {
+    @apply inline-flex items-center px-2.5 py-1 rounded-md bg-slate-100/95 border border-slate-200 text-slate-700 text-xs font-semibold;
+  }
+
+  .icon-accent {
+    @apply p-2 rounded-md bg-blue-100/80 border border-blue-200/80;
   }
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Utility classes for better control */
 @layer utilities {
-  .glass-effect {
-    @apply backdrop-blur-xl bg-white/70 border border-white/20;
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 
-  .gradient-text {
-    @apply bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent;
-  }
-
-  .shadow-card {
-    @apply shadow-sm hover:shadow-md transition-shadow duration-200;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

@@ -1,180 +1,202 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { FolderOpen, Github, ExternalLink, Microscope, Lock, Zap } from 'lucide-react'
+import { Button } from '../components/Button'
 import Footer from '../components/Footer'
+
+type PanelType = 'home' | 'profile' | 'skills' | 'projects' | 'education' | 'contact'
+
+interface ProjectsPanelProps {
+  onPanelChange: (panel: PanelType) => void
+}
 
 const PROJECTS = [
   {
-    icon: Microscope,
-    title: '🔬 Security Testing & Analysis Lab',
-    description:
-      'Designed and operated a comprehensive security testing and analysis lab to understand how real-world attacks are executed and how they are detected and investigated using security monitoring tools.',
+    icon: Lock,
+    title: 'PentaVault: Automated VAPT Security Suite',
+    objective:
+      'Build a security testing platform that operationalizes end-to-end VAPT workflows from reconnaissance to structured reporting.',
     keyFocus: [
-      'Attack simulation using Kali Linux',
-      'Vulnerability exploitation against Metasploitable',
-      'Traffic capture and inspection',
-      'Network-based detection using Suricata',
-      'Host-based monitoring using Wazuh',
-      'Correlation of attack activity with alerts and logs',
+      '7-stage assessment pipeline with reconnaissance, fingerprinting, crawling, exploit-oriented testing, and CVSS scoring',
+      'MITRE ATT&CK v16.1 and OWASP 2025 mapping to translate technical findings into structured risk context',
+      'FastAPI dashboard with scan history, AI-assisted threat interpretation, and multi-format report generation',
+    ],
+    environment: 'Python 3.13, FastAPI, Selenium, Nmap, Gemini AI, FPDF2, Node.js DOCX',
+    github: 'https://github.com/Govind-v-kartha/PentaVault',
+  },
+  {
+    icon: Microscope,
+    title: 'Security Testing & Analysis Lab',
+    objective:
+      'Design and operate a controlled security lab to emulate realistic attack behavior and validate defensive visibility.',
+    keyFocus: [
+      'Adversary simulation with Kali Linux against controlled targets',
+      'Protocol-level traffic inspection and evidence extraction for reporting',
+      'Detection validation workflows with Suricata and Wazuh across host and network telemetry',
+      'Correlation of attacker behavior with alerts and response-relevant artifacts',
     ],
     environment: 'Kali Linux, Metasploitable, Wazuh, Suricata, Wireshark, VirtualBox',
   },
   {
     icon: Microscope,
-    title: '🔍 OSINT-Based Attack Preparation',
-    description:
-      'Conducted passive open-source intelligence gathering against a simulated organization to identify public-facing assets, exposed information, and potential attack entry points. Focused on target profiling and attack surface mapping without active scanning.',
+    title: 'OSINT-Based Attack Surface Profiling',
+    objective:
+      'Perform passive reconnaissance to identify exposed assets, probable entry vectors, and pre-engagement risk indicators.',
     keyFocus: [
-      'Passive reconnaissance and intelligence gathering',
-      'Target profiling and asset discovery',
-      'Attack surface mapping',
-      'Exposed information identification',
-      'Potential vulnerability assessment',
+      'External asset discovery and target profiling from open-source intelligence',
+      'Exposure mapping of internet-facing services, metadata, and attack surface signals',
+      'Pre-assessment risk modeling to prioritize pentest paths',
     ],
     environment: 'OSINT, theHarvester, Amass, Shodan',
   },
   {
     icon: Lock,
-    title: '🔐 QMail – Secure Email Communication Prototype',
-    description:
-      'Developed a secure email communication prototype focused on protecting communication against classical and future quantum threats.',
+    title: 'Hybrid AI-Quantum Satellite Image Encryption',
+    objective:
+      'Design a dual-layer image security pipeline that combines AI-driven ROI segmentation with quantum and classical encryption for high-value imagery.',
     keyFocus: [
-      'Secure communication',
-      'Post-quantum cryptography concepts',
-      'Simulated Quantum Key Distribution (QKD)',
+      'FlexiMo-based semantic segmentation to isolate sensitive ROI regions before encryption',
+      'Per-channel NEQR quantum encryption for ROI blocks with chaotic scrambling and DNA diffusion',
+      'AES-256-GCM background protection with fusion and zero-loss reconstruction verification',
+    ],
+    environment: 'Python, Qiskit AerSimulator, FlexiMo ViT, AES-256-GCM, OpenCV, NumPy',
+    github: null,
+  },
+  {
+    icon: Lock,
+    title: 'QMail: Secure Communication Prototype',
+    objective:
+      'Develop a secure communication prototype exploring resilience against classical and future quantum-era threats.',
+    keyFocus: [
+      'Secure communication architecture and key-management workflow design',
+      'Post-quantum cryptography concept integration in a practical prototype',
+      'Simulated Quantum Key Distribution (QKD) workflow evaluation',
     ],
     environment: null,
     github: 'https://github.com/Govind-v-kartha/Qmail',
   },
   {
     icon: Zap,
-    title: '🦈 MyShark – Network Traffic Analysis Tool',
-    description:
-      'Built a Python-based packet capture and traffic analysis tool for inspecting live network traffic and identifying suspicious communication patterns.',
-    keyFocus: ['Packet capture', 'Protocol analysis', 'Security investigation support'],
+    title: 'MyShark: Network Traffic Analysis Tool',
+    objective:
+      'Build a Python-based packet capture and traffic analysis utility for rapid investigation of suspicious network behavior.',
+    keyFocus: [
+      'Packet capture and parsing pipeline for investigation workflows',
+      'Protocol-level analysis for anomaly detection support',
+      'Operational assistance for security triage and network forensics',
+    ],
     environment: null,
     github: 'https://myshark.vercel.app/',
   },
 ]
 
-export default function ProjectsPanel() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
-    },
-  }
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+  },
+}
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
-  }
+const itemVariants = {
+  hidden: { opacity: 0, y: 8 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.22 } },
+}
+
+export default function ProjectsPanel({ onPanelChange }: ProjectsPanelProps) {
+  const shouldReduceMotion = useReducedMotion()
 
   return (
-    <div className="flex flex-col h-full bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg animate-fade-in-up">
-      {/* Panel Header */}
-      <div className="px-8 py-8 bg-white border-b border-slate-200">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-blue-600 rounded-lg">
-            <FolderOpen className="w-6 h-6 text-white" />
+    <div className="panel-shell">
+      <div className="panel-header">
+        <div className="panel-header-row">
+          <div className="panel-header-icon">
+            <FolderOpen className="w-6 h-6" />
           </div>
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Projects</h1>
+          <div>
+            <h1 className="panel-title">Selected Projects</h1>
+            <p className="panel-subtitle">Projects demonstrating offensive security practice, detection-oriented analysis, and quantum-security research foundations.</p>
+          </div>
         </div>
       </div>
 
-      {/* Panel Content */}
-      <div className="flex-1 overflow-y-auto px-8 py-8">
+      <div className="panel-content">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="max-w-4xl space-y-6"
+          className="max-w-4xl space-y-5"
         >
-          {PROJECTS.map((project, idx) => {
+          {PROJECTS.map((project) => {
             const Icon = project.icon
             return (
-              <motion.div
-                key={idx}
+              <motion.section
+                key={project.title}
                 variants={itemVariants}
-                className="bg-white rounded-lg border border-slate-200 overflow-hidden hover:border-blue-300 hover:shadow-lg transition-all duration-300 group"
+                className="section-card overflow-hidden"
+                whileHover={shouldReduceMotion ? undefined : { y: -1 }}
               >
-                {/* Project Header */}
-                <div className="px-6 py-5 bg-gradient-to-r from-slate-50 to-blue-50 border-b border-slate-200">
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-start gap-4 flex-1">
-                      <div className="p-2.5 bg-blue-100 rounded-lg flex-shrink-0 group-hover:bg-blue-200 transition-colors">
-                        <Icon className="w-5 h-5 text-blue-600" />
+                <div className="section-header">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex items-start gap-3">
+                      <div className="icon-accent">
+                        <Icon className="w-4 h-4 text-blue-700" />
                       </div>
                       <div>
-                        <h2 className="text-lg font-semibold text-slate-900">{project.title}</h2>
+                        <h2 className="section-title">{project.title}</h2>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Project Content */}
-                <div className="px-6 py-5 space-y-4">
-                  <p className="text-slate-700 leading-relaxed">{project.description}</p>
-
-                  <div className="space-y-4">
-                    <div>
-                      <p className="font-semibold text-slate-900 mb-3">Key Focus:</p>
-                      <ul className="space-y-2">
-                        {project.keyFocus.map((item, itemIdx) => (
-                          <li key={itemIdx} className="flex items-start gap-3 text-slate-700">
-                            <span className="text-blue-600 font-bold mt-0.5">•</span>
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {project.environment && (
-                      <div>
-                        <p className="font-semibold text-slate-900 mb-2">Environment:</p>
-                        <div className="flex flex-wrap gap-2">
-                          {project.environment.split(', ').map((tool, toolIdx) => (
-                            <span key={toolIdx} className="bg-slate-100 text-slate-700 px-3 py-1.5 rounded-md text-sm font-medium">
-                              <strong>{tool}</strong>
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    )}
+                <div className="section-card-content space-y-4">
+                  <div>
+                    <p className="section-label mb-2">Objective</p>
+                    <p className="text-slate-700 leading-relaxed">{project.objective}</p>
                   </div>
+
+                  <div>
+                    <p className="section-label mb-2">Scope</p>
+                    <ul className="space-y-1.5 text-slate-700">
+                      {project.keyFocus.map((item) => (
+                        <li key={item} className="flex gap-2.5">
+                          <span className="text-blue-700/90 mt-0.5">•</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {project.environment && (
+                    <div>
+                      <p className="section-label mb-2">Environment</p>
+                      <div className="flex flex-wrap gap-2">
+                        {project.environment.split(', ').map((tool) => (
+                          <span key={tool} className="meta-chip">
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
                   {project.github && (
-                    <motion.a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="inline-flex items-center gap-2 px-4 py-2.5 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-sm hover:shadow-md mt-2"
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      icon={project.github.includes('myshark.vercel.app') ? ExternalLink : Github}
+                      onClick={() => window.open(project.github, '_blank', 'noopener,noreferrer')}
                     >
-                      {project.github.includes('myshark.vercel.app') ? (
-                        <>
-                          <span>🚀</span>
-                          Try Now
-                        </>
-                      ) : (
-                        <>
-                          <Github className="w-4 h-4" />
-                          GitHub Repository
-                        </>
-                      )}
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </motion.a>
+                      {project.github.includes('myshark.vercel.app') ? 'Open Live Demo' : 'View Repository'}
+                    </Button>
                   )}
                 </div>
-              </motion.div>
+              </motion.section>
             )
           })}
         </motion.div>
       </div>
 
-      {/* Footer */}
-      <Footer />
+      <Footer onPanelChange={onPanelChange} />
     </div>
   )
 }

@@ -1,11 +1,11 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { LucideIcon } from 'lucide-react';
+import React from 'react'
+import { motion } from 'framer-motion'
+import { LucideIcon } from 'lucide-react'
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  icon?: LucideIcon;
-  hoverable?: boolean;
-  children: React.ReactNode;
+  icon?: LucideIcon
+  hoverable?: boolean
+  children: React.ReactNode
 }
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
@@ -14,23 +14,22 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
       <motion.div
         ref={ref}
         className={`
-          bg-white border border-slate-200 rounded-xl p-6
-          transition-all duration-200
-          ${hoverable ? 'hover:shadow-md hover:border-slate-300' : ''}
+          section-card p-6
+          ${hoverable ? '' : 'hover:border-slate-200/90 hover:shadow-sm hover:bg-slate-50/95'}
           ${className}
         `}
-        whileHover={hoverable ? { y: -2 } : {}}
+        whileHover={hoverable ? { y: -1 } : undefined}
         {...(props as any)}
       >
         {Icon && (
           <div className="mb-4">
-            <Icon size={24} className="text-blue-600" />
+            <Icon size={24} className="text-blue-700" />
           </div>
         )}
         {children}
       </motion.div>
-    );
+    )
   }
-);
+)
 
-Card.displayName = 'Card';
+Card.displayName = 'Card'

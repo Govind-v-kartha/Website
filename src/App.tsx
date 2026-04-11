@@ -1,9 +1,8 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import Sidebar from './components/Sidebar'
 import { TopBar } from './components/TopBar'
 
-// Import panel components
 import HomePanel from './panels/HomePanel'
 import ProfilePanel from './panels/ProfilePanel'
 import SkillsPanel from './panels/SkillsPanel'
@@ -13,7 +12,7 @@ import ContactPanel from './panels/ContactPanel'
 
 type PanelType = 'home' | 'profile' | 'skills' | 'projects' | 'education' | 'contact'
 
-const panelComponents: Record<PanelType, React.ComponentType> = {
+const panelComponents: Record<PanelType, React.ComponentType<{ onPanelChange: (panel: PanelType) => void }>> = {
   home: HomePanel,
   profile: ProfilePanel,
   skills: SkillsPanel,
@@ -24,33 +23,28 @@ const panelComponents: Record<PanelType, React.ComponentType> = {
 
 export default function App() {
   const [activePanel, setActivePanel] = useState<PanelType>('home')
+  const shouldReduceMotion = useReducedMotion()
 
   const ActivePanel = panelComponents[activePanel]
 
   return (
-    <div className="h-screen bg-white flex flex-col">
-      {/* Top Bar */}
+    <div className="h-screen flex flex-col">
       <TopBar activePanel={activePanel} onPanelChange={setActivePanel} />
 
-      {/* Main Layout */}
       <div className="flex flex-1 overflow-hidden">
-        {/* Sidebar */}
         <Sidebar activePanel={activePanel} onPanelChange={setActivePanel} />
 
-  
-
-        {/* Main Content Area */}
         <main className="flex-1 overflow-hidden pt-16 pl-0 lg:pl-72">
           <AnimatePresence mode="wait">
             <motion.div
               key={activePanel}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
+              animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+              exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -12 }}
+              transition={{ duration: shouldReduceMotion ? 0.15 : 0.26, ease: [0.22, 1, 0.36, 1] }}
               className="h-full"
             >
-              <ActivePanel />
+              <ActivePanel onPanelChange={setActivePanel} />
             </motion.div>
           </AnimatePresence>
         </main>

@@ -1,213 +1,159 @@
 import { motion } from 'framer-motion'
-import { Zap, Shield, Code, Server } from 'lucide-react'
+import { Code, Shield, Radar, Wrench } from 'lucide-react'
 import Footer from '../components/Footer'
 
-const SKILL_CARDS = [
+type PanelType = 'home' | 'profile' | 'skills' | 'projects' | 'education' | 'contact'
+
+interface SkillsPanelProps {
+  onPanelChange: (panel: PanelType) => void
+}
+
+const CAPABILITY_AREAS = [
   {
-    title: 'Security Testing & Attack Analysis',
+    title: 'Offensive Security & VAPT',
     icon: Shield,
-    color: 'from-red-50 to-orange-50',
-    accentColor: 'text-red-600',
-    bgAccent: 'bg-red-50',
-    items: [
-      'Network reconnaissance and service enumeration',
-      'Vulnerability discovery and exploitation testing',
-      'Web and service-level attack simulation',
-      'Credential and service abuse scenarios',
-      'Post-exploitation behavior analysis',
+    points: [
+      'Reconnaissance, attack surface mapping, and service enumeration',
+      'Vulnerability validation through controlled exploitation workflows',
+      'Web, API, and network testing in practical lab and project settings',
+      'Evidence-based reporting with remediation prioritization',
     ],
+    tools: ['Nmap', 'Metasploit', 'Burp Suite', 'OWASP ZAP', 'SQLMap', 'Gobuster'],
   },
   {
-    title: 'Detection, Monitoring & Investigation',
-    icon: Zap,
-    color: 'from-amber-50 to-yellow-50',
-    accentColor: 'text-amber-600',
-    bgAccent: 'bg-amber-50',
-    items: [
-      'Network traffic inspection and protocol analysis',
-      'Host-based and network-based threat detection',
-      'Alert validation and event correlation',
-      'Distinguishing malicious vs benign activity',
-      'Investigation workflows based on observed indicators',
+    title: 'Detection, Investigation & Validation',
+    icon: Radar,
+    points: [
+      'Network and host telemetry analysis for detection efficacy validation',
+      'Alert triage, event correlation, and investigation-focused analysis',
+      'Support blue-team readiness through offensive insight mapping',
+      'Security control gap identification across attack paths',
     ],
+    tools: ['Wazuh', 'Suricata', 'Wireshark', 'Scapy'],
   },
 ]
 
-export default function SkillsPanel() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.08, delayChildren: 0.2 },
-    },
-  }
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+  },
+}
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
-  }
+const itemVariants = {
+  hidden: { opacity: 0, y: 8 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.22 } },
+}
 
+export default function SkillsPanel({ onPanelChange }: SkillsPanelProps) {
   return (
-    <div className="flex flex-col h-full bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg animate-fade-in-up">
-      {/* Panel Header */}
-      <div className="px-8 py-8 bg-white border-b border-slate-200">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-blue-600 rounded-lg">
-            <Code className="w-6 h-6 text-white" />
+    <div className="panel-shell">
+      <div className="panel-header">
+        <div className="panel-header-row">
+          <div className="panel-header-icon">
+            <Code className="w-6 h-6" />
           </div>
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Technical Skills</h1>
+          <div>
+            <h1 className="panel-title">Technical Capability</h1>
+            <p className="panel-subtitle">Applied skills across offensive security testing, detection analysis, and quantum-security foundations.</p>
+          </div>
         </div>
       </div>
 
-      {/* Panel Content */}
-      <div className="flex-1 overflow-y-auto px-8 py-8">
+      <div className="panel-content">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="max-w-4xl space-y-6"
         >
-          {/* Main Skill Cards */}
-          {SKILL_CARDS.map((skillCard, idx) => {
-            const Icon = skillCard.icon
+          {CAPABILITY_AREAS.map((area) => {
+            const Icon = area.icon
             return (
-              <motion.div
-                key={idx}
-                variants={itemVariants}
-                className="bg-white rounded-lg border border-slate-200 overflow-hidden hover:border-blue-300 hover:shadow-lg transition-all duration-300"
-              >
-                {/* Card Header */}
-                <div className={`bg-gradient-to-r ${skillCard.color} px-6 py-5 border-b border-slate-200`}>
+              <motion.section key={area.title} variants={itemVariants} className="section-card overflow-hidden">
+                <div className="section-header">
                   <div className="flex items-center gap-3">
-                    <div className={`p-2.5 ${skillCard.bgAccent} rounded-lg`}>
-                      <Icon className={`w-5 h-5 ${skillCard.accentColor}`} />
+                    <div className="icon-accent">
+                      <Icon className="w-4 h-4 text-blue-700" />
                     </div>
-                    <h2 className="text-lg font-semibold text-slate-900">{skillCard.title}</h2>
+                    <h2 className="section-title">{area.title}</h2>
                   </div>
                 </div>
 
-                {/* Card Content */}
-                <div className="px-6 py-5">
-                  <ul className="space-y-3">
-                    {skillCard.items.map((item, itemIdx) => (
-                      <motion.li
-                        key={itemIdx}
-                        variants={itemVariants}
-                        className="flex items-start gap-3 text-slate-700"
-                      >
-                        <span className="text-blue-600 font-bold mt-0.5">→</span>
+                <div className="section-card-content space-y-5">
+                  <ul className="space-y-2 text-slate-700">
+                    {area.points.map((item) => (
+                      <li key={item} className="flex gap-2.5">
+                        <span className="text-blue-700 mt-0.5">•</span>
                         <span>{item}</span>
-                      </motion.li>
+                      </li>
                     ))}
                   </ul>
+
+                  <div>
+                    <p className="section-label mb-2">Core Tools</p>
+                    <div className="flex flex-wrap gap-2">
+                      {area.tools.map((tool) => (
+                        <span key={tool} className="meta-chip">
+                          {tool}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </motion.div>
+              </motion.section>
             )
           })}
 
-          {/* Tools & Technologies Card */}
-          <motion.div
-            variants={itemVariants}
-            className="bg-white rounded-lg border border-slate-200 overflow-hidden hover:border-blue-300 hover:shadow-lg transition-all duration-300"
-          >
-            <div className="bg-gradient-to-r from-purple-50 to-pink-50 px-6 py-5 border-b border-slate-200">
+          <motion.section variants={itemVariants} className="section-card overflow-hidden">
+            <div className="section-header">
               <div className="flex items-center gap-3">
-                <div className="p-2.5 bg-purple-50 rounded-lg">
-                  <Server className="w-5 h-5 text-purple-600" />
+                <div className="icon-accent">
+                  <Wrench className="w-4 h-4 text-blue-700" />
                 </div>
-                <h2 className="text-lg font-semibold text-slate-900">Tools & Technologies</h2>
+                <h2 className="section-title">Platforms, Programming & Quantum Basis</h2>
               </div>
             </div>
 
-            <div className="px-6 py-5 space-y-6">
-              {/* Testing Tools */}
+            <div className="section-card-content grid gap-5 md:grid-cols-2">
               <div>
-                <p className="font-semibold text-slate-900 mb-3 text-sm">Testing:</p>
+                <p className="section-label mb-2">Platforms</p>
                 <div className="flex flex-wrap gap-2">
-                  {['Nmap', 'Metasploit', 'Burp Suite', 'OWASP ZAP', 'Hydra', 'Nikto', 'Gobuster', 'SQLMap'].map((tool, idx) => (
-                    <span key={idx} className="bg-blue-50 text-blue-700 px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">
-                      {tool}
+                  {['Kali Linux', 'VirtualBox', 'Qiskit AerSimulator'].map((item) => (
+                    <span key={item} className="meta-chip">
+                      {item}
                     </span>
                   ))}
                 </div>
               </div>
 
-              {/* Detection Tools */}
               <div>
-                <p className="font-semibold text-slate-900 mb-3 text-sm">Detection:</p>
-                <div className="flex flex-wrap gap-2">
-                  {['Wazuh', 'Suricata'].map((tool, idx) => (
-                    <span key={idx} className="bg-amber-50 text-amber-700 px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-amber-100 transition-colors">
-                      {tool}
-                    </span>
+                <p className="section-label mb-2">Programming</p>
+                <ul className="space-y-2 text-slate-700 text-sm">
+                  {[
+                    'Python for security tooling and automation',
+                    'Bash scripting for reconnaissance and workflow support',
+                    'SQL fundamentals for testing and data validation',
+                    'Strong applied basis in post-quantum and hybrid encryption concepts',
+                  ].map((item) => (
+                    <li key={item} className="flex gap-2.5">
+                      <span className="text-blue-700 mt-0.5">•</span>
+                      <span>{item}</span>
+                    </li>
                   ))}
-                </div>
-              </div>
-
-              {/* Traffic Analysis Tools */}
-              <div>
-                <p className="font-semibold text-slate-900 mb-3 text-sm">Traffic Analysis:</p>
-                <div className="flex flex-wrap gap-2">
-                  {['Wireshark', 'Scapy'].map((tool, idx) => (
-                    <span key={idx} className="bg-purple-50 text-purple-700 px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-purple-100 transition-colors">
-                      {tool}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Platforms */}
-              <div>
-                <p className="font-semibold text-slate-900 mb-3 text-sm">Platforms:</p>
-                <div className="flex flex-wrap gap-2">
-                  {['Kali Linux', 'VirtualBox'].map((tool, idx) => (
-                    <span key={idx} className="bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-slate-200 transition-colors">
-                      {tool}
-                    </span>
-                  ))}
-                </div>
+                </ul>
               </div>
             </div>
-          </motion.div>
+          </motion.section>
 
-          {/* Programming Card */}
-          <motion.div
-            variants={itemVariants}
-            className="bg-white rounded-lg border border-slate-200 overflow-hidden hover:border-blue-300 hover:shadow-lg transition-all duration-300"
-          >
-            <div className="bg-gradient-to-r from-blue-50 to-cyan-50 px-6 py-5 border-b border-slate-200">
-              <div className="flex items-center gap-3">
-                <div className="p-2.5 bg-blue-50 rounded-lg">
-                  <Code className="w-5 h-5 text-blue-600" />
-                </div>
-                <h2 className="text-lg font-semibold text-slate-900">Programming</h2>
-              </div>
-            </div>
-
-            <div className="px-6 py-5">
-              <ul className="space-y-3">
-                {[
-                  'Python (security tooling, packet analysis, automation)',
-                  'Bash (basic)',
-                  'SQL (basic)',
-                ].map((item, idx) => (
-                  <motion.li
-                    key={idx}
-                    variants={itemVariants}
-                    className="flex items-start gap-3 text-slate-700"
-                  >
-                    <span className="text-blue-600 font-bold mt-0.5">→</span>
-                    <span>{item}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </div>
-          </motion.div>
+          <motion.p variants={itemVariants} className="text-sm text-slate-600">
+            Capability depth is evidenced through project outcomes, lab reproducibility, and engagement-style deliverables rather than subjective rating scales.
+          </motion.p>
         </motion.div>
       </div>
 
-      {/* Footer */}
-      <Footer />
+      <Footer onPanelChange={onPanelChange} />
     </div>
   )
 }
