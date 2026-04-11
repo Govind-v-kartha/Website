@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 120" role="img" aria-label="Digital University Kerala">
+  <rect width="360" height="120" fill="transparent"/>
+  <circle cx="78" cy="60" r="36" fill="#0EA5E9" opacity="0.85"/>
+  <circle cx="78" cy="60" r="25" fill="#111827"/>
+  <text x="78" y="67" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800" fill="#38BDF8">DUK</text>
+  <text x="146" y="54" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700" fill="#E2E8F0">Digital University</text>
+  <text x="146" y="82" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700" fill="#93C5FD">Kerala</text>
+</svg>

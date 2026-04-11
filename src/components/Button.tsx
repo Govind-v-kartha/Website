@@ -12,9 +12,12 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantClasses = {
-  primary: 'bg-slate-900 text-white hover:bg-blue-700 active:bg-blue-800 shadow-sm hover:shadow-md',
-  secondary: 'bg-slate-50 text-slate-800 border border-slate-300 hover:bg-white hover:border-blue-200 active:bg-slate-100',
-  tertiary: 'text-blue-700 hover:text-blue-800 hover:bg-blue-50/70 active:bg-blue-100/70 rounded-md px-1.5 -mx-1.5 underline-offset-2 hover:underline',
+  primary:
+    'bg-[#38BDF8] text-white hover:bg-[#0EA5E9] active:bg-[#0284C7] border border-[#38BDF866] shadow-[0_0_28px_rgba(0,180,255,0.35)]',
+  secondary:
+    'bg-[#0B1020] text-slate-200 border border-[#1E293B] hover:border-[#38BDF866] hover:text-white hover:bg-[#111827]',
+  tertiary:
+    'text-[#38BDF8] border border-[#38BDF84d] hover:bg-[#38BDF81A] hover:text-white',
 }
 
 const sizeClasses = {
@@ -44,14 +47,14 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         type={type}
         className={`
-          font-medium rounded-lg transition-all duration-200 inline-flex items-center gap-2
+          font-medium rounded-lg transition-all duration-300 inline-flex items-center gap-2
           disabled:opacity-50 disabled:cursor-not-allowed
           focus-ring
           ${variantClasses[variant]}
           ${sizeClasses[size]}
           ${className}
         `}
-        whileHover={!disabled && !isLoading ? { scale: 1.015, y: -1 } : undefined}
+        whileHover={!disabled && !isLoading ? { scale: 1.01, y: -1 } : undefined}
         whileTap={!disabled && !isLoading ? { scale: 0.99 } : undefined}
         disabled={disabled || isLoading}
         {...(props as any)}
@@ -59,13 +62,15 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {isLoading ? (
           <motion.div
             animate={{ rotate: 360 }}
-            transition={{ duration: 1, repeat: Infinity }}
+            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
             className="w-4 h-4 border-2 border-current border-t-transparent rounded-full"
           />
         ) : Icon && iconPosition === 'left' ? (
           <Icon size={18} />
         ) : null}
+
         <span>{children}</span>
+
         {Icon && iconPosition === 'right' && !isLoading && <Icon size={18} />}
       </motion.button>
     )

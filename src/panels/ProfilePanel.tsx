@@ -1,110 +1,150 @@
-import { motion, useReducedMotion } from 'framer-motion'
-import { User, Shield, Radar, CircuitBoard } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { MapPin, Mail, CheckCircle2, User, Award, Shield, Bug } from 'lucide-react'
 
-const PROFILE_SECTIONS = [
-  {
-    title: 'Offensive Security Practice',
-    icon: Shield,
-    points: [
-      'Practice controlled attack simulation to evaluate exposure across web and network surfaces.',
-      'Validate exploitable paths and document impact with evidence-driven findings.',
-      'Translate offensive observations into practical hardening recommendations.',
-    ],
-  },
-  {
-    title: 'Detection & Investigation',
-    icon: Radar,
-    points: [
-      'Use network and host telemetry analysis to validate detection effectiveness.',
-      'Correlate alerts and events for investigation-focused security analysis.',
-      'Support remediation planning with technically reproducible findings.',
-    ],
-  },
-  {
-    title: 'Quantum Security Foundation',
-    icon: CircuitBoard,
-    points: [
-      'Build applied foundation knowledge in post-quantum and hybrid cryptographic concepts.',
-      'Explore quantum-oriented security workflows through project-based experimentation.',
-      'Connect cybersecurity practice with research-backed quantum security learning.',
-    ],
-  },
+const COUNTERS = [
+  { value: 6, suffix: '+', label: 'Security Projects', icon: Shield },
+  { value: 3, suffix: '+', label: 'Certificates', icon: CheckCircle2 },
+  { value: 2, suffix: '', label: 'Academic Degrees', icon: Award },
+  { value: 1, suffix: '+', label: 'Major Academic Recognition', icon: Bug },
 ]
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 8 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.22 } },
-}
+const INTERESTS = ['Offensive Security', 'Detection Analysis', 'Digital Forensics', 'Quantum Security', 'Open Source Security']
 
 export default function ProfilePanel() {
-  const shouldReduceMotion = useReducedMotion()
+  const [imageVisible, setImageVisible] = useState(true)
+  const [counts, setCounts] = useState(COUNTERS.map(() => 0))
+  const [hasAnimated, setHasAnimated] = useState(false)
+  const counterRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    if (!counterRef.current || hasAnimated) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries[0].isIntersecting) return
+
+        setHasAnimated(true)
+        const start = performance.now()
+        const duration = 1200
+
+        const tick = (now: number) => {
+          const progress = Math.min((now - start) / duration, 1)
+          setCounts(COUNTERS.map((counter) => Math.floor(counter.value * progress)))
+          if (progress < 1) requestAnimationFrame(tick)
+        }
+
+        requestAnimationFrame(tick)
+        observer.disconnect()
+      },
+      { threshold: 0.3 }
+    )
+
+    observer.observe(counterRef.current)
+    return () => observer.disconnect()
+  }, [hasAnimated])
 
   return (
-    <div className="panel-shell">
-      <div className="panel-header">
-        <div className="panel-header-row">
-          <div className="panel-header-icon">
-            <User className="w-6 h-6" />
+    <div className="space-y-6">
+      <div className="panel-shell">
+        <div className="panel-header">
+          <div className="panel-header-row">
+            <div className="panel-header-icon">
+              <User className="w-6 h-6" />
+            </div>
+            <div>
+              <h1 className="panel-title">Professional Profile</h1>
+              <p className="panel-subtitle">Applied cybersecurity learning path across offensive testing, detection analysis, and quantum foundations.</p>
+            </div>
           </div>
-          <div>
-            <h1 className="panel-title">Professional Profile</h1>
-            <p className="panel-subtitle">Entry-level capability overview across offensive security, detection analysis, and quantum-security foundations.</p>
+        </div>
+
+        <div className="panel-content">
+          <div className="grid gap-6 lg:grid-cols-[0.9fr,1.1fr] items-start">
+            <div className="section-card section-card-content space-y-4">
+              <div className="overflow-hidden rounded-xl border border-[#1E293B] bg-[#0B1020] aspect-square">
+                {imageVisible ? (
+                  <img
+                    src="/profile.jpg"
+                    alt="Govind V Kartha"
+                    className="h-full w-full object-cover"
+                    onError={() => setImageVisible(false)}
+                  />
+                ) : (
+                  <div className="placeholder-gradient h-full w-full flex items-center justify-center text-sm text-slate-300">
+                    Profile image unavailable
+                  </div>
+                )}
+              </div>
+
+              <div className="grid gap-2 text-sm text-slate-300">
+                <p className="inline-flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-[#38BDF8]" /> Kerala, India
+                </p>
+                <p className="inline-flex items-center gap-2">
+                  <Mail className="w-4 h-4 text-[#38BDF8]" /> knvgovind@gmail.com
+                </p>
+              </div>
+            </div>
+
+            <div className="section-card section-card-content space-y-5">
+              <div className="inline-flex items-center gap-2 pb-1 border-b border-[#38BDF866]">
+                <h2 className="text-2xl font-semibold text-white">Cybersecurity Graduate (Entry-Level)</h2>
+              </div>
+
+              <p className="text-slate-300 leading-relaxed text-balance">
+                Cybersecurity fresher focused on offensive security practice, web application testing, and detection-aware
+                investigation workflows, with growing project-backed depth in quantum-security concepts.
+              </p>
+
+              <p className="text-slate-400 leading-relaxed">
+                I prioritize reproducible testing, evidence-driven reporting, and practical remediation alignment. My current
+                trajectory is to contribute in internship and entry-level roles where I can support secure engineering and
+                security operations outcomes.
+              </p>
+
+              <div className="grid gap-2 text-sm text-slate-300">
+                <p><span className="text-slate-400">Name:</span> Govind V Kartha</p>
+                <p><span className="text-slate-400">Location:</span> Kerala, India</p>
+                <p><span className="text-slate-400">Email:</span> knvgovind@gmail.com</p>
+                <p><span className="text-slate-400">Availability:</span> <span className="text-emerald-400">Open to Work</span></p>
+              </div>
+
+              <div>
+                <p className="section-label mb-2">Interests</p>
+                <div className="flex flex-wrap gap-2">
+                  {INTERESTS.map((interest) => (
+                    <span key={interest} className="meta-chip">
+                      {interest}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="panel-content">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="max-w-4xl space-y-6"
-        >
-          <motion.section variants={itemVariants} className="section-card p-6">
-            <p className="text-slate-700 leading-relaxed text-balance">
-              Cybersecurity fresher focused on offensive security practice, web application testing, and detection-aware investigation workflows, with growing project-backed depth in quantum-security concepts.
-            </p>
-          </motion.section>
-
-          <div className="grid gap-4 md:grid-cols-2">
-            {PROFILE_SECTIONS.map((section, index) => {
-              const Icon = section.icon
+      <div ref={counterRef} className="panel-shell">
+        <div className="panel-content">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {COUNTERS.map((counter, index) => {
+              const Icon = counter.icon
               return (
-                <motion.section
-                  key={section.title}
-                  variants={itemVariants}
-                  className={`section-card p-5 ${index === 2 ? 'md:col-span-2' : ''}`}
-                  whileHover={shouldReduceMotion ? undefined : { y: -1 }}
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="icon-accent">
-                      <Icon className="w-4 h-4 text-blue-700" />
-                    </div>
-                    <h2 className="section-title">{section.title}</h2>
+                <div key={counter.label} className="section-card section-card-content text-center space-y-2">
+                  <div className="mx-auto icon-accent w-fit">
+                    <Icon className="w-4 h-4 text-[#38BDF8]" />
                   </div>
-                  <ul className="space-y-2 text-sm text-slate-700">
-                    {section.points.map((point) => (
-                      <li key={point} className="flex gap-2.5">
-                        <span className="text-blue-700/90 mt-0.5">•</span>
-                        <span>{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.section>
+                  <p className="text-2xl font-semibold text-white">
+                    {counts[index]}
+                    {counter.suffix}
+                  </p>
+                  <p className="text-sm text-slate-400">{counter.label}</p>
+                </div>
               )
             })}
           </div>
-        </motion.div>
+        </div>
       </div>
-
     </div>
   )
 }

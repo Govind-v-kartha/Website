@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { useReducedMotion } from 'framer-motion'
-import Sidebar from './components/Sidebar'
-import { TopBar } from './components/TopBar'
+import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 
 import HomePanel from './panels/HomePanel'
@@ -9,52 +7,23 @@ import ProfilePanel from './panels/ProfilePanel'
 import SkillsPanel from './panels/SkillsPanel'
 import ServicesPanel from './panels/ServicesPanel'
 import ProjectsPanel from './panels/ProjectsPanel'
-import EducationPanel from './panels/EducationPanel'
 import ContactPanel from './panels/ContactPanel'
+import Certifications from './components/Certifications'
 
-type SectionId = 'home' | 'profile' | 'skills' | 'services' | 'projects' | 'education' | 'contact'
+type SectionId = 'home' | 'about' | 'skills' | 'services' | 'projects' | 'certificates' | 'contact'
 
-const SECTION_IDS: SectionId[] = ['home', 'profile', 'skills', 'services', 'projects', 'education', 'contact']
+const SECTION_IDS: SectionId[] = ['home', 'about', 'skills', 'services', 'projects', 'certificates', 'contact']
 
 export default function App() {
   const [activeSection, setActiveSection] = useState<SectionId>('home')
-  const shouldReduceMotion = useReducedMotion()
 
-  const navigateToSection = useCallback(
-    (section: SectionId) => {
-      const target = document.getElementById(section)
-      if (!target) return
+  const navigateToSection = useCallback((section: SectionId) => {
+    const sectionElement = document.getElementById(section)
+    if (!sectionElement) return
 
-      setActiveSection(section)
-      target.scrollIntoView({ behavior: shouldReduceMotion ? 'auto' : 'smooth', block: 'start' })
-      window.history.replaceState(null, '', `#${section}`)
-    },
-    [shouldReduceMotion]
-  )
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntries = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
-
-        if (visibleEntries[0]) {
-          setActiveSection(visibleEntries[0].target.id as SectionId)
-        }
-      },
-      {
-        rootMargin: '-32% 0px -46% 0px',
-        threshold: [0.2, 0.4, 0.6],
-      }
-    )
-
-    SECTION_IDS.forEach((id) => {
-      const sectionElement = document.getElementById(id)
-      if (sectionElement) observer.observe(sectionElement)
-    })
-
-    return () => observer.disconnect()
+    sectionElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    setActiveSection(section)
+    window.history.replaceState(null, '', `#${section}`)
   }, [])
 
   useEffect(() => {
@@ -64,38 +33,81 @@ export default function App() {
     }
   }, [navigateToSection])
 
+  useEffect(() => {
+    const activeObserver = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
+
+        if (visible[0]) {
+          setActiveSection(visible[0].target.id as SectionId)
+        }
+      },
+      {
+        rootMargin: '-42% 0px -45% 0px',
+        threshold: [0.2, 0.35, 0.5],
+      }
+    )
+
+    SECTION_IDS.forEach((id) => {
+      const sectionElement = document.getElementById(id)
+      if (sectionElement) activeObserver.observe(sectionElement)
+    })
+
+    return () => activeObserver.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            revealObserver.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.16 }
+    )
+
+    const revealElements = document.querySelectorAll<HTMLElement>('[data-reveal]')
+    revealElements.forEach((element) => revealObserver.observe(element))
+
+    return () => revealObserver.disconnect()
+  }, [])
+
   return (
     <div className="min-h-screen">
-      <TopBar activeSection={activeSection} onNavigate={navigateToSection} />
-      <Sidebar activeSection={activeSection} onNavigate={navigateToSection} />
+      <Navbar activeSection={activeSection} onNavigate={navigateToSection} />
 
-      <main className="pt-20 pb-8">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-          <section id="home" className="scroll-mt-24 surface-section">
+      <main className="pt-24 pb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
+          <section id="home" className="scroll-mt-24" data-reveal>
             <HomePanel onNavigate={navigateToSection} />
           </section>
 
-          <section id="profile" className="scroll-mt-24 surface-section">
+          <section id="about" className="scroll-mt-24" data-reveal>
             <ProfilePanel />
           </section>
 
-          <section id="skills" className="scroll-mt-24 surface-section">
+          <section id="skills" className="scroll-mt-24" data-reveal>
             <SkillsPanel />
           </section>
 
-          <section id="services" className="scroll-mt-24 surface-section">
+          <section id="services" className="scroll-mt-24" data-reveal>
             <ServicesPanel />
           </section>
 
-          <section id="projects" className="scroll-mt-24 surface-section">
+          <section id="projects" className="scroll-mt-24" data-reveal>
             <ProjectsPanel />
           </section>
 
-          <section id="education" className="scroll-mt-24 surface-section">
-            <EducationPanel />
+          <section id="certificates" className="scroll-mt-24" data-reveal>
+            <Certifications />
           </section>
 
-          <section id="contact" className="scroll-mt-24 surface-section">
+          <section id="contact" className="scroll-mt-24" data-reveal>
             <ContactPanel />
           </section>
         </div>

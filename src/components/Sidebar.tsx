@@ -14,6 +14,7 @@ import {
   Linkedin,
   ExternalLink,
   FileText,
+  Download,
 } from 'lucide-react'
 
 type SectionId = 'home' | 'profile' | 'skills' | 'services' | 'projects' | 'education' | 'contact'
@@ -161,13 +162,22 @@ export default function Sidebar({ activeSection, onNavigate }: SidebarProps) {
               <ExternalLink size={12} className="ml-auto" />
             </a>
             <a
-              href="/cv/Govind_V_Kartha_CV.pdf"
+              href="/cv/Govind_V_Kartha_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="focus-ring flex items-center gap-2 text-sm text-slate-300 hover:text-blue-200 hover:bg-slate-800/80 transition-all duration-200 rounded px-2 py-1"
             >
               <FileText size={16} />
-              <span>View CV</span>
+              <span>View Resume</span>
+              <ExternalLink size={12} className="ml-auto" />
+            </a>
+            <a
+              href="/cv/Govind_V_Kartha_Resume.pdf"
+              download="Govind_V_Kartha_Resume.pdf"
+              className="focus-ring flex items-center gap-2 text-sm text-slate-300 hover:text-blue-200 hover:bg-slate-800/80 transition-all duration-200 rounded px-2 py-1"
+            >
+              <Download size={16} />
+              <span>Download Resume</span>
               <ExternalLink size={12} className="ml-auto" />
             </a>
             <a

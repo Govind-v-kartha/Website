@@ -1,151 +1,172 @@
-import { motion, useReducedMotion } from 'framer-motion'
-import { Download, FileText, FolderGit2, Github, Mail, MapPin, ShieldCheck } from 'lucide-react'
-import { Button } from '../components/Button'
+import { useEffect, useState } from 'react'
+import { Github, Linkedin, Download, Mail, Sparkles } from 'lucide-react'
 
-type SectionId = 'home' | 'profile' | 'skills' | 'services' | 'projects' | 'education' | 'contact'
+type SectionId = 'home' | 'about' | 'skills' | 'services' | 'projects' | 'certificates' | 'contact'
 
 interface HomePanelProps {
   onNavigate: (section: SectionId) => void
 }
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.1,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 8 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.22, ease: 'easeOut' as const },
-  },
-}
+const ROLE_CYCLE = [
+  'Cybersecurity Graduate',
+  'Offensive Security Learner',
+  'Detection Analysis Learner',
+  'Quantum Security Explorer',
+]
 
 export default function HomePanel({ onNavigate }: HomePanelProps) {
-  const shouldReduceMotion = useReducedMotion()
+  const [roleIndex, setRoleIndex] = useState(0)
+  const [typedRole, setTypedRole] = useState('')
+  const [typingForward, setTypingForward] = useState(true)
+  const [isPhotoLoaded, setIsPhotoLoaded] = useState(true)
+
+  useEffect(() => {
+    const currentRole = ROLE_CYCLE[roleIndex]
+    const isCompleted = typedRole.length === currentRole.length
+
+    const timer = setTimeout(
+      () => {
+        if (typingForward) {
+          if (isCompleted) {
+            setTypingForward(false)
+            return
+          }
+          setTypedRole(currentRole.slice(0, typedRole.length + 1))
+        } else {
+          if (typedRole.length === 0) {
+            setTypingForward(true)
+            setRoleIndex((prev) => (prev + 1) % ROLE_CYCLE.length)
+            return
+          }
+          setTypedRole(currentRole.slice(0, typedRole.length - 1))
+        }
+      },
+      typingForward ? 62 : 38
+    )
+
+    return () => clearTimeout(timer)
+  }, [roleIndex, typedRole, typingForward])
 
   return (
-    <div className="panel-shell">
-      <div className="panel-header">
-        <div className="panel-header-row">
-          <div className="panel-header-icon">
-            <ShieldCheck className="w-6 h-6" />
-          </div>
-          <div>
-            <h1 className="panel-title">Executive Summary</h1>
-            <p className="panel-subtitle text-balance">
-              Entry-level cybersecurity professional focused on offensive security, web application testing, detection-driven analysis, and quantum-security research foundations.
+    <div className="panel-shell min-h-[calc(100vh-7.5rem)]">
+      <div className="absolute inset-0 grid-overlay opacity-25 pointer-events-none" aria-hidden="true" />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle at 22% 18%, rgba(56,189,248,0.14), transparent 32%), radial-gradient(circle at 78% 34%, rgba(16,185,129,0.12), transparent 28%)',
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="panel-content relative z-10 min-h-[calc(100vh-8.5rem)] flex items-center">
+        <div className="w-full grid gap-8 lg:grid-cols-[1.4fr,1fr] items-center">
+          <div className="space-y-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1.5 text-xs text-emerald-200">
+              <span className="h-2 w-2 rounded-full bg-emerald-400" style={{ animation: 'pulse-dot 1.5s ease-in-out infinite' }} />
+              Available for Opportunities
+            </div>
+
+            <div>
+              <h1 className="text-3xl sm:text-5xl font-bold text-white leading-tight text-balance">Hi, I'm Govind V Kartha</h1>
+              <p className="mt-3 text-xl sm:text-2xl font-semibold text-[#38BDF8] min-h-[2.2rem]">
+                {typedRole}
+                <span className="text-[#38BDF8]/70">|</span>
+              </p>
+            </div>
+
+            <p className="text-slate-300 text-base sm:text-lg max-w-2xl text-balance">
+              Building practical cybersecurity capability through offensive testing projects, detection-driven analysis,
+              and research-oriented exploration of quantum and post-quantum security concepts.
             </p>
+
+            <div className="flex flex-wrap gap-3">
+              <button
+                type="button"
+                onClick={() => onNavigate('contact')}
+                className="focus-ring inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#38BDF8] text-white font-semibold hover:bg-[#0EA5E9] glow-accent transition-all duration-300"
+              >
+                <Mail size={18} />
+                Let's Connect
+              </button>
+
+              <a
+                href="/cv/Govind_V_Kartha_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus-ring inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[#38BDF899] text-[#38BDF8] hover:bg-[#38BDF81A] transition-all duration-300"
+              >
+                <Mail size={18} />
+                View Resume
+              </a>
+
+              <a
+                href="/cv/Govind_V_Kartha_Resume.pdf"
+                download="Govind_V_Kartha_Resume.pdf"
+                className="focus-ring inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[#1E293B] text-slate-300 hover:text-white hover:border-[#38BDF866] transition-all duration-300"
+              >
+                <Download size={18} />
+                Download Resume
+              </a>
+
+              <button
+                type="button"
+                onClick={() => onNavigate('projects')}
+                className="focus-ring inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[#1E293B] text-slate-300 hover:text-white hover:border-[#38BDF866] transition-all duration-300"
+              >
+                <Sparkles size={18} />
+                View Projects
+              </button>
+            </div>
+
+            <div className="flex items-center gap-2.5">
+              <a
+                href="https://github.com/Govind-v-kartha"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus-ring h-10 w-10 rounded-lg border border-[#1E293B] bg-[#0B1020]/80 text-slate-300 hover:text-[#38BDF8] hover:border-[#38BDF866] inline-flex items-center justify-center transition-all duration-300"
+                aria-label="GitHub"
+              >
+                <Github size={18} />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/govind-v-kartha"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus-ring h-10 w-10 rounded-lg border border-[#1E293B] bg-[#0B1020]/80 text-slate-300 hover:text-[#38BDF8] hover:border-[#38BDF866] inline-flex items-center justify-center transition-all duration-300"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={18} />
+              </a>
+            </div>
+          </div>
+
+          <div className="relative max-w-sm mx-auto w-full">
+            <div className="relative aspect-square">
+              <div
+                className="absolute inset-0 rounded-full border-2 border-dashed border-[#38BDF880]"
+                style={{ animation: 'spin-ring 12s linear infinite' }}
+                aria-hidden="true"
+              />
+
+              <div className="absolute inset-[14px] rounded-full border-[3px] border-[#38BDF8] overflow-hidden bg-[#0B1020]">
+                {isPhotoLoaded ? (
+                  <img
+                    src="/profile.jpg"
+                    alt="Govind V Kartha"
+                    className="h-full w-full object-cover"
+                    onError={() => setIsPhotoLoaded(false)}
+                  />
+                ) : (
+                  <div className="placeholder-gradient h-full w-full flex items-center justify-center text-slate-300 text-sm">
+                    Profile image unavailable
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
-      <div className="panel-content">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="max-w-4xl space-y-6"
-        >
-          <motion.section variants={itemVariants} className="section-card p-6">
-            <div className="flex flex-col md:flex-row md:items-start gap-6">
-              <motion.img
-                src="/profile.jpg"
-                alt="Govind V Kartha"
-                className="w-28 h-28 rounded-xl object-cover border border-slate-300 shadow-sm ring-1 ring-white/80"
-                whileHover={shouldReduceMotion ? undefined : { scale: 1.01 }}
-                transition={{ duration: 0.18 }}
-              />
-
-              <div className="flex-1 space-y-4">
-                <div>
-                  <h2 className="text-3xl lg:text-4xl font-semibold text-slate-900 tracking-tight">Govind V Kartha</h2>
-                  <p className="mt-1 text-base font-semibold text-blue-700">Offensive Security & Quantum Security Enthusiast</p>
-                </div>
-
-                <div className="space-y-2 text-sm text-slate-600">
-                  <p className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-slate-500" />
-                    Thrissur, Kerala, India
-                  </p>
-                  <a
-                    href="mailto:knvgovind@gmail.com"
-                    className="focus-ring inline-flex items-center gap-2 rounded text-slate-600 hover:text-blue-700 transition-colors"
-                  >
-                    <Mail className="w-4 h-4 text-slate-500" />
-                    knvgovind@gmail.com
-                  </a>
-                </div>
-
-                <p className="text-slate-700 leading-relaxed text-balance">
-                  I am building practical cybersecurity capability through offensive testing projects, detection-focused analysis, and research-oriented exploration of quantum and post-quantum security concepts.
-                </p>
-
-                <div className="flex flex-wrap gap-2">
-                  <span className="meta-chip">Offensive Security</span>
-                  <span className="meta-chip">Web App Testing</span>
-                  <span className="meta-chip">Detection & Analysis</span>
-                  <span className="meta-chip">Quantum Security Basis</span>
-                </div>
-              </div>
-            </div>
-          </motion.section>
-
-          <motion.section variants={itemVariants} className="section-card p-6">
-            <p className="section-label mb-3">Current Focus</p>
-            <ul className="space-y-2 text-slate-700">
-              <li className="flex gap-3">
-                <span className="text-blue-700/90 mt-0.5">•</span>
-                Entry-level VAPT workflow practice covering reconnaissance, testing, validation, and structured reporting.
-              </li>
-              <li className="flex gap-3">
-                <span className="text-blue-700/90 mt-0.5">•</span>
-                Detection-focused analysis using telemetry and alert correlation to validate defensive visibility.
-              </li>
-              <li className="flex gap-3">
-                <span className="text-blue-700/90 mt-0.5">•</span>
-                Quantum-security foundation work spanning post-quantum concepts and hybrid encryption experimentation.
-              </li>
-            </ul>
-          </motion.section>
-
-          <motion.div variants={itemVariants} className="flex flex-wrap gap-3">
-            <Button
-              variant="primary"
-              size="md"
-              icon={FileText}
-              onClick={() => window.open('/cv/Govind_V_Kartha_CV.pdf', '_blank', 'noopener,noreferrer')}
-            >
-              View CV
-            </Button>
-            <a
-              href="/cv/Govind_V_Kartha_CV.pdf"
-              download="Govind_V_Kartha_CV.pdf"
-              className="focus-ring font-medium rounded-lg transition-all duration-200 inline-flex items-center gap-2 bg-slate-50 text-slate-800 border border-slate-300 hover:bg-white hover:border-blue-200 active:bg-slate-100 px-4 py-2.5 text-base"
-            >
-              <Download size={18} />
-              <span>Download CV</span>
-            </a>
-            <Button variant="secondary" size="md" icon={FolderGit2} onClick={() => onNavigate('projects')}>
-              View Projects
-            </Button>
-            <Button variant="tertiary" size="md" icon={Github} onClick={() => window.open('https://github.com/Govind-v-kartha', '_blank', 'noopener,noreferrer')}>
-              GitHub
-            </Button>
-            <Button variant="tertiary" size="md" icon={Mail} onClick={() => onNavigate('contact')}>
-              Engage
-            </Button>
-          </motion.div>
-        </motion.div>
-      </div>
-
     </div>
   )
 }

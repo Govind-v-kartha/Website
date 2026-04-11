@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,18 +12,27 @@
 
 html {
   scroll-behavior: smooth;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 body {
-  font-family: inherit;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   line-height: 1.6;
-  color: #0f172a;
+  color: #ffffff;
   background:
-    radial-gradient(circle at 12% 0%, rgba(59, 130, 246, 0.12), transparent 36%),
-    radial-gradient(circle at 88% -10%, rgba(30, 64, 175, 0.1), transparent 34%),
-    linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
+    radial-gradient(circle at 12% 12%, rgba(0, 180, 255, 0.12), transparent 30%),
+    radial-gradient(circle at 88% 22%, rgba(0, 144, 204, 0.12), transparent 34%),
+    linear-gradient(180deg, #0a0f1e 0%, #0d1526 100%);
+  min-height: 100vh;
   @apply antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
 }
 
 ::-webkit-scrollbar {
@@ -30,97 +41,164 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #0a0f1e;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 8px;
-  border: 2px solid transparent;
-  background-clip: padding-box;
-  transition: background 0.2s ease;
+  background: #1e293b;
+  border-radius: 999px;
+  border: 2px solid #0a0f1e;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-  background-clip: padding-box;
-  border: 2px solid transparent;
+  background: #334155;
 }
 
 * {
-  scrollbar-color: #cbd5e1 transparent;
+  scrollbar-color: #1e293b #0a0f1e;
   scrollbar-width: thin;
 }
 
 @layer components {
   .focus-ring {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-100;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38BDF8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B1020];
   }
 
   .panel-shell {
-    @apply flex flex-col rounded-2xl overflow-hidden border border-slate-200/80 bg-slate-50/85 backdrop-blur-sm shadow-lg shadow-slate-900/5;
+    @apply relative rounded-xl border border-[#1E293B] bg-[#111827]/85 backdrop-blur-sm overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.4)];
+    transition: all 0.3s ease;
   }
 
   .panel-header {
-    @apply px-6 sm:px-8 py-6 sm:py-7 bg-gradient-to-r from-slate-100/95 via-slate-50/95 to-slate-100/90 border-b border-slate-200/90;
+    @apply px-5 sm:px-7 py-5 border-b border-[#1E293B] bg-gradient-to-r from-[#101A30]/95 via-[#111827]/90 to-[#101A30]/95;
   }
 
   .panel-header-row {
-    @apply flex items-center gap-3;
+    @apply flex items-start gap-3;
   }
 
   .panel-header-icon {
-    @apply p-2.5 rounded-lg bg-slate-900 text-white shadow-sm;
+    @apply p-2.5 rounded-lg border border-[#38BDF833] bg-[#38BDF81A] text-[#38BDF8] shadow-[0_0_24px_rgba(0,180,255,0.25)];
   }
 
   .panel-title {
-    @apply text-3xl font-semibold tracking-tight text-slate-900;
+    @apply text-2xl sm:text-3xl font-semibold tracking-tight text-white;
   }
 
   .panel-subtitle {
-    @apply mt-2 text-sm text-slate-600;
+    @apply mt-2 text-sm text-slate-400;
   }
 
   .panel-content {
-    @apply flex-1 overflow-visible px-5 sm:px-8 py-6 sm:py-8;
+    @apply px-5 sm:px-7 py-6;
   }
 
   .section-card {
-    @apply bg-slate-50/95 border border-slate-200/90 rounded-xl shadow-sm transition-all duration-200 hover:border-blue-300/90 hover:shadow-xl hover:shadow-blue-900/10 hover:bg-white;
+    @apply rounded-xl border border-[#1E293B] bg-[#101A30]/75;
+    transition: all 0.3s ease;
+  }
+
+  .section-card:hover {
+    border-color: rgba(0, 180, 255, 0.5);
+    box-shadow: 0 18px 40px rgba(0, 180, 255, 0.12);
+    transform: translateY(-2px);
   }
 
   .section-header {
-    @apply px-5 sm:px-6 py-4 border-b border-slate-200/90 bg-gradient-to-r from-slate-100/95 via-slate-50/95 to-slate-100/90;
+    @apply px-5 sm:px-6 py-4 border-b border-[#1E293B] bg-[#0B1020]/70;
   }
 
   .section-card-content {
-    @apply p-6;
+    @apply p-5 sm:p-6;
   }
 
   .section-title {
-    @apply text-lg font-semibold text-slate-900;
+    @apply text-lg font-semibold text-white;
   }
 
   .section-label {
-    @apply text-xs font-semibold uppercase tracking-wide text-slate-500;
+    @apply text-xs uppercase tracking-wide font-semibold text-slate-400;
   }
 
   .meta-chip {
-    @apply inline-flex items-center px-2.5 py-1 rounded-md bg-slate-100/95 border border-slate-200 text-slate-700 text-xs font-semibold;
+    @apply inline-flex items-center px-2.5 py-1 rounded-md border border-[#1E293B] bg-[#0B1020]/80 text-slate-300 text-xs font-medium;
+    transition: all 0.3s ease;
+  }
+
+  .meta-chip:hover {
+    border-color: rgba(0, 180, 255, 0.45);
+    color: #ffffff;
   }
 
   .icon-accent {
-    @apply p-2 rounded-md bg-blue-100/80 border border-blue-200/80;
+    @apply p-2 rounded-md border border-[#38BDF833] bg-[#38BDF81A];
   }
 
-  .surface-section {
-    @apply py-2 sm:py-3;
+  .grid-overlay {
+    background-image:
+      linear-gradient(rgba(0, 180, 255, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 180, 255, 0.07) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .placeholder-gradient {
+    @apply rounded-xl border border-[#1E293B];
+    background: linear-gradient(135deg, #101A30 0%, #111827 48%, #0B1020 100%);
   }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .section-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .section-reveal.is-visible,
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 0 rgba(0, 180, 255, 0), 0 0 36px rgba(0, 180, 255, 0.22);
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes spin-ring {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes gradient-wave {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 
@@ -135,5 +213,11 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .section-reveal,
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

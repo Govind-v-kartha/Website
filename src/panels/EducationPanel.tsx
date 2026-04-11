@@ -130,7 +130,7 @@ export default function EducationPanel() {
 
           <motion.section variants={itemVariants} className="section-card overflow-hidden" whileHover={shouldReduceMotion ? undefined : { y: -1 }}>
             <div className="section-header">
-              <h2 className="section-title">Certifications</h2>
+              <h2 className="section-title">Certificates</h2>
             </div>
             <div className="section-card-content space-y-4">
               {CERTIFICATIONS.map((cert) => {

@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import emailjs from '@emailjs/browser'
-import { motion, useReducedMotion } from 'framer-motion'
-import { Mail, Github, Linkedin, Send, CheckCircle, AlertCircle, FileText, Download } from 'lucide-react'
+import { Mail, MapPin, Github, Linkedin, CheckCircle, AlertCircle, Send } from 'lucide-react'
 import { Button } from '../components/Button'
 import { Input, TextArea } from '../components/Input'
 
@@ -14,11 +13,8 @@ export default function ContactPanel() {
   })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [message, setMessage] = useState('')
-  const shouldReduceMotion = useReducedMotion()
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
@@ -50,7 +46,7 @@ export default function ContactPanel() {
 
       if (response.status === 200) {
         setStatus('success')
-        setMessage('Message received. I will respond as soon as possible.')
+        setMessage("Message received. I'll respond as soon as possible.")
         setFormData({ name: '', email: '', subject: 'Role or Internship Opportunity', message: '' })
 
         setTimeout(() => {
@@ -60,33 +56,16 @@ export default function ContactPanel() {
       }
     } catch (error) {
       setStatus('error')
+      const details = error instanceof Error ? error.message : ''
 
-      let errorDetails = ''
-      if (error instanceof Error) {
-        errorDetails = error.message
-      }
-
-      if (errorDetails.includes('401') || errorDetails.includes('Invalid credentials')) {
-        setMessage('Email service configuration is invalid. Please try direct email.')
-      } else if (errorDetails.includes('404') || errorDetails.includes('Template not found')) {
-        setMessage('Email template is unavailable. Please try direct email.')
+      if (details.includes('401') || details.includes('Invalid credentials')) {
+        setMessage('Email service configuration is invalid. Please use direct email.')
+      } else if (details.includes('404') || details.includes('Template not found')) {
+        setMessage('Email template is unavailable. Please use direct email.')
       } else {
         setMessage('Message sending failed. Please try again or contact directly by email.')
       }
     }
-  }
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.08, delayChildren: 0.1 },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 8 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.22 } },
   }
 
   return (
@@ -97,20 +76,53 @@ export default function ContactPanel() {
             <Mail className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="panel-title">Contact</h1>
-            <p className="panel-subtitle">For security opportunities, project collaboration, or quantum-security discussions, connect through the form or direct channels below.</p>
+            <h1 className="panel-title">Contact & Collaboration</h1>
+            <p className="panel-subtitle">Interested in internships, project collaboration, or security-learning discussions? Reach out through direct channels or the form.</p>
           </div>
         </div>
       </div>
 
       <div className="panel-content">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="max-w-4xl grid gap-6 lg:grid-cols-[1.2fr,0.8fr]"
-        >
-          <motion.section variants={itemVariants} className="section-card overflow-hidden" whileHover={shouldReduceMotion ? undefined : { y: -1 }}>
+        <div className="grid gap-5 lg:grid-cols-2">
+          <section className="section-card section-card-content space-y-3">
+            <h2 className="section-title">Contact Information</h2>
+
+            <div className="space-y-2.5 text-sm text-slate-300">
+              <div className="flex items-center gap-2.5">
+                <MapPin className="w-4 h-4 text-[#38BDF8]" />
+                <span>Kerala, India</span>
+              </div>
+              <a href="mailto:knvgovind@gmail.com" className="focus-ring flex items-center gap-2.5 hover:text-white transition-colors duration-300">
+                <Mail className="w-4 h-4 text-[#38BDF8]" />
+                <span>knvgovind@gmail.com</span>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/govind-v-kartha"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus-ring flex items-center gap-2.5 hover:text-white transition-colors duration-300"
+              >
+                <Linkedin className="w-4 h-4 text-[#38BDF8]" />
+                <span>linkedin.com/in/govind-v-kartha</span>
+              </a>
+              <a
+                href="https://github.com/Govind-v-kartha"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus-ring flex items-center gap-2.5 hover:text-white transition-colors duration-300"
+              >
+                <Github className="w-4 h-4 text-[#38BDF8]" />
+                <span>github.com/Govind-v-kartha</span>
+              </a>
+            </div>
+
+            <div className="mt-3 inline-flex items-center gap-2 rounded-lg border border-emerald-400/30 bg-emerald-500/10 px-3 py-2 text-xs text-emerald-200">
+              <CheckCircle className="w-4 h-4" />
+              Open to internships and collaborations
+            </div>
+          </section>
+
+          <section className="section-card overflow-hidden">
             <div className="section-header">
               <h2 className="section-title">Send a Message</h2>
             </div>
@@ -121,14 +133,14 @@ export default function ContactPanel() {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                label="Name"
+                label="Full Name"
                 required
                 placeholder="Your full name"
               />
 
               <Input
-                type="email"
                 id="email"
+                type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
@@ -138,15 +150,15 @@ export default function ContactPanel() {
               />
 
               <div>
-                <label htmlFor="subject" className="block text-sm font-semibold text-slate-800 mb-2">
-                  Subject <span className="text-red-600 ml-1">*</span>
+                <label htmlFor="subject" className="block text-sm font-semibold text-slate-200 mb-2">
+                  Subject <span className="text-red-400 ml-1">*</span>
                 </label>
                 <select
                   id="subject"
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className="focus-ring w-full h-11 px-3.5 border border-slate-300 rounded-lg bg-slate-50/95 text-sm text-slate-900 transition-all hover:border-blue-300 hover:bg-white focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-600"
+                  className="focus-ring w-full h-11 px-3.5 border border-[#1E293B] rounded-lg bg-[#0B1020]/90 text-sm text-slate-100 transition-all hover:border-[#38BDF866] focus:outline-none"
                 >
                   <option value="Role or Internship Opportunity">Role or Internship Opportunity</option>
                   <option value="Project Collaboration">Project Collaboration</option>
@@ -163,119 +175,30 @@ export default function ContactPanel() {
                 label="Message"
                 required
                 rows={5}
-                placeholder="Please share details about the opportunity, project context, or your question."
+                placeholder="Please share your requirement or collaboration details."
               />
 
               {status === 'success' && (
-                <motion.div
-                  initial={{ opacity: 0, y: -8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-3.5 bg-emerald-50 border border-emerald-200 rounded-lg flex items-start gap-2.5"
-                >
-                  <CheckCircle className="w-4.5 h-4.5 text-emerald-700 flex-shrink-0 mt-0.5" />
-                  <p className="text-sm text-emerald-800">{message}</p>
-                </motion.div>
+                <div className="p-3.5 bg-emerald-500/10 border border-emerald-400/30 rounded-lg flex items-start gap-2.5">
+                  <CheckCircle className="w-4.5 h-4.5 text-emerald-300 flex-shrink-0 mt-0.5" />
+                  <p className="text-sm text-emerald-200">{message}</p>
+                </div>
               )}
 
               {status === 'error' && (
-                <motion.div
-                  initial={{ opacity: 0, y: -8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-3.5 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2.5"
-                >
-                  <AlertCircle className="w-4.5 h-4.5 text-red-700 flex-shrink-0 mt-0.5" />
-                  <p className="text-sm text-red-800">{message}</p>
-                </motion.div>
+                <div className="p-3.5 bg-red-500/10 border border-red-400/30 rounded-lg flex items-start gap-2.5">
+                  <AlertCircle className="w-4.5 h-4.5 text-red-300 flex-shrink-0 mt-0.5" />
+                  <p className="text-sm text-red-200">{message}</p>
+                </div>
               )}
 
               <Button type="submit" variant="primary" icon={Send} isLoading={status === 'loading'} className="w-full justify-center">
                 {status === 'loading' ? 'Sending Message' : 'Send Message'}
               </Button>
             </form>
-          </motion.section>
-
-          <motion.section variants={itemVariants} className="section-card overflow-hidden h-fit" whileHover={shouldReduceMotion ? undefined : { y: -1 }}>
-            <div className="section-header">
-              <h2 className="section-title">Direct Channels</h2>
-            </div>
-
-            <div className="section-card-content space-y-3">
-              <a
-                href="/cv/Govind_V_Kartha_CV.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="focus-ring flex items-center gap-3 p-3 rounded-lg border border-slate-200/90 bg-slate-50/75 hover:border-blue-200 hover:bg-white transition-all duration-200"
-              >
-                <div className="icon-accent">
-                  <FileText className="w-4 h-4 text-blue-700" />
-                </div>
-                <div className="flex-1">
-                  <p className="text-xs text-slate-500">Curriculum Vitae</p>
-                  <p className="text-sm font-semibold text-slate-900">View CV (PDF)</p>
-                </div>
-              </a>
-
-              <a
-                href="/cv/Govind_V_Kartha_CV.pdf"
-                download="Govind_V_Kartha_CV.pdf"
-                className="focus-ring flex items-center gap-3 p-3 rounded-lg border border-slate-200/90 bg-slate-50/75 hover:border-blue-200 hover:bg-white transition-all duration-200"
-              >
-                <div className="icon-accent">
-                  <Download className="w-4 h-4 text-blue-700" />
-                </div>
-                <div className="flex-1">
-                  <p className="text-xs text-slate-500">Curriculum Vitae</p>
-                  <p className="text-sm font-semibold text-slate-900">Download CV</p>
-                </div>
-              </a>
-
-              <a
-                href="mailto:knvgovind@gmail.com"
-                className="focus-ring flex items-center gap-3 p-3 rounded-lg border border-slate-200/90 bg-slate-50/75 hover:border-blue-200 hover:bg-white transition-all duration-200"
-              >
-                <div className="icon-accent">
-                  <Mail className="w-4 h-4 text-blue-700" />
-                </div>
-                <div>
-                  <p className="text-xs text-slate-500">Email</p>
-                  <p className="text-sm font-semibold text-slate-900">knvgovind@gmail.com</p>
-                </div>
-              </a>
-
-              <a
-                href="https://github.com/Govind-v-kartha"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="focus-ring flex items-center gap-3 p-3 rounded-lg border border-slate-200/90 bg-slate-50/75 hover:border-blue-200 hover:bg-white transition-all duration-200"
-              >
-                <div className="icon-accent">
-                  <Github className="w-4 h-4 text-blue-700" />
-                </div>
-                <div>
-                  <p className="text-xs text-slate-500">GitHub</p>
-                  <p className="text-sm font-semibold text-slate-900">github.com/Govind-v-kartha</p>
-                </div>
-              </a>
-
-              <a
-                href="https://www.linkedin.com/in/govind-v-kartha"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="focus-ring flex items-center gap-3 p-3 rounded-lg border border-slate-200/90 bg-slate-50/75 hover:border-blue-200 hover:bg-white transition-all duration-200"
-              >
-                <div className="icon-accent">
-                  <Linkedin className="w-4 h-4 text-blue-700" />
-                </div>
-                <div>
-                  <p className="text-xs text-slate-500">LinkedIn</p>
-                  <p className="text-sm font-semibold text-slate-900">linkedin.com/in/govind-v-kartha</p>
-                </div>
-              </a>
-            </div>
-          </motion.section>
-        </motion.div>
+          </section>
+        </div>
       </div>
-
     </div>
   )
 }

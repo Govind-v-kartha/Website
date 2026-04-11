@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 120" role="img" aria-label="Google Cloud">
+  <rect width="360" height="120" fill="transparent"/>
+  <g transform="translate(24 20)">
+    <circle cx="56" cy="42" r="24" fill="#4285F4"/>
+    <circle cx="84" cy="42" r="21" fill="#EA4335"/>
+    <circle cx="70" cy="58" r="21" fill="#FBBC05"/>
+    <rect x="47" y="54" width="56" height="18" rx="9" fill="#34A853"/>
+  </g>
+  <text x="140" y="53" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#E5E7EB">Google</text>
+  <text x="140" y="82" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#93C5FD">Cloud</text>
+</svg>

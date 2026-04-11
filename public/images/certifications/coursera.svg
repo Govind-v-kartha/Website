@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 120" role="img" aria-label="Coursera">
+  <rect width="360" height="120" fill="transparent"/>
+  <rect x="38" y="26" width="284" height="68" rx="34" fill="#0056D2"/>
+  <text x="180" y="70" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="700" fill="#FFFFFF">coursera</text>
+</svg>
