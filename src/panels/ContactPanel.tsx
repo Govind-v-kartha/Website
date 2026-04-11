@@ -4,15 +4,8 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { Mail, Github, Linkedin, Send, CheckCircle, AlertCircle, FileText, Download } from 'lucide-react'
 import { Button } from '../components/Button'
 import { Input, TextArea } from '../components/Input'
-import Footer from '../components/Footer'
 
-type PanelType = 'home' | 'profile' | 'skills' | 'projects' | 'education' | 'contact'
-
-interface ContactPanelProps {
-  onPanelChange: (panel: PanelType) => void
-}
-
-export default function ContactPanel({ onPanelChange }: ContactPanelProps) {
+export default function ContactPanel() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -283,7 +276,6 @@ export default function ContactPanel({ onPanelChange }: ContactPanelProps) {
         </motion.div>
       </div>
 
-      <Footer onPanelChange={onPanelChange} />
     </div>
   )
 }

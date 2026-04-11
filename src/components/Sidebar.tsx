@@ -7,6 +7,7 @@ import {
   FolderGit2,
   GraduationCap,
   Mail,
+  Briefcase,
   Menu,
   X,
   Github,
@@ -15,23 +16,24 @@ import {
   FileText,
 } from 'lucide-react'
 
-type PanelType = 'home' | 'profile' | 'skills' | 'projects' | 'education' | 'contact'
+type SectionId = 'home' | 'profile' | 'skills' | 'services' | 'projects' | 'education' | 'contact'
 
 interface SidebarProps {
-  activePanel: PanelType
-  onPanelChange: (panel: PanelType) => void
+  activeSection: SectionId
+  onNavigate: (section: SectionId) => void
 }
 
-const navigationItems: Array<{ id: PanelType; label: string; icon: typeof Home }> = [
+const navigationItems: Array<{ id: SectionId; label: string; icon: typeof Home }> = [
   { id: 'home', label: 'Home', icon: Home },
   { id: 'profile', label: 'Profile', icon: User },
   { id: 'skills', label: 'Skills', icon: Zap },
+  { id: 'services', label: 'Services', icon: Briefcase },
   { id: 'projects', label: 'Projects', icon: FolderGit2 },
   { id: 'education', label: 'Education', icon: GraduationCap },
   { id: 'contact', label: 'Contact', icon: Mail },
 ]
 
-export default function Sidebar({ activePanel, onPanelChange }: SidebarProps) {
+export default function Sidebar({ activeSection, onNavigate }: SidebarProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const shouldReduceMotion = useReducedMotion()
 
@@ -41,7 +43,7 @@ export default function Sidebar({ activePanel, onPanelChange }: SidebarProps) {
     <>
       <motion.button
         type="button"
-        className="focus-ring fixed top-4 right-4 z-50 lg:hidden p-2.5 border border-slate-300/90 bg-slate-50/95 backdrop-blur text-slate-900 rounded-lg shadow-sm hover:border-blue-300 hover:bg-white transition-all duration-200"
+        className="focus-ring fixed top-4 right-4 z-50 lg:hidden p-2.5 border border-slate-600/90 bg-slate-900/85 backdrop-blur text-slate-100 rounded-lg shadow-sm hover:border-blue-400 hover:bg-slate-900 transition-all duration-200"
         onClick={() => setSidebarOpen((prev) => !prev)}
         whileHover={shouldReduceMotion ? undefined : { scale: 1.01 }}
         whileTap={shouldReduceMotion ? undefined : { scale: 0.99 }}
@@ -54,7 +56,7 @@ export default function Sidebar({ activePanel, onPanelChange }: SidebarProps) {
       {sidebarOpen && (
         <motion.button
           type="button"
-          className="fixed inset-0 bg-slate-900/45 backdrop-blur-sm z-30 lg:hidden"
+          className="fixed inset-0 bg-slate-950/65 backdrop-blur-sm z-30 lg:hidden"
           onClick={closeSidebar}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -65,18 +67,18 @@ export default function Sidebar({ activePanel, onPanelChange }: SidebarProps) {
 
       <motion.aside
         className={`
-          fixed left-0 top-16 bottom-0 w-72 bg-slate-50/95 backdrop-blur border-r border-slate-200/90 overflow-y-auto z-40
-          lg:translate-x-0 transform transition-transform duration-200
-          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+          fixed left-0 top-16 bottom-0 w-72 bg-slate-950/90 backdrop-blur-xl border-r border-slate-700/80 overflow-y-auto z-40
+          lg:hidden transform transition-transform duration-200
+          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
         `}
         initial={false}
       >
         <div className="p-6 flex flex-col h-full">
           <button
             type="button"
-            className="focus-ring mb-8 text-left p-4 rounded-xl border border-slate-200/90 bg-white/85 hover:bg-white hover:border-blue-200 hover:shadow-sm transition-all duration-200"
+            className="focus-ring mb-8 text-left p-4 rounded-xl border border-slate-700/80 bg-slate-900/80 hover:bg-slate-900 hover:border-blue-400/60 transition-all duration-200"
             onClick={() => {
-              onPanelChange('contact')
+              onNavigate('home')
               closeSidebar()
             }}
           >
@@ -84,22 +86,22 @@ export default function Sidebar({ activePanel, onPanelChange }: SidebarProps) {
               <img
                 src="/profile.jpg"
                 alt="Govind V Kartha"
-                className="w-14 h-14 rounded-lg object-cover border border-slate-300"
+                className="w-14 h-14 rounded-lg object-cover border border-slate-600"
               />
               <div>
-                <p className="font-semibold text-slate-900 text-sm leading-tight">Govind V Kartha</p>
-                <p className="text-xs text-slate-500 mt-1">Cybersecurity Graduate (Entry-Level)</p>
+                <p className="font-semibold text-slate-100 text-sm leading-tight">Govind V Kartha</p>
+                <p className="text-xs text-slate-400 mt-1">Cybersecurity Graduate (Entry-Level)</p>
               </div>
             </div>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Entry-level cybersecurity professional with strong interest in offensive security, application security testing, detection engineering, and quantum security research.
+            <p className="text-xs text-slate-300 leading-relaxed">
+              Entry-level cybersecurity professional focused on offensive testing, detection analysis, and quantum-security foundations.
             </p>
           </button>
 
-          <nav className="space-y-2 mb-8" aria-label="Primary">
+          <nav className="space-y-2 mb-8" aria-label="Mobile navigation">
             {navigationItems.map((item, index) => {
               const Icon = item.icon
-              const isActive = activePanel === item.id
+              const isActive = activeSection === item.id
 
               return (
                 <motion.button
@@ -110,12 +112,12 @@ export default function Sidebar({ activePanel, onPanelChange }: SidebarProps) {
                     transition-all duration-200
                     ${
                       isActive
-                        ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
-                        : 'bg-transparent text-slate-700 border-transparent hover:bg-slate-100/95 hover:border-slate-200 hover:text-slate-900'
+                        ? 'bg-blue-500/20 text-blue-100 border-blue-300/40'
+                        : 'bg-transparent text-slate-300 border-transparent hover:bg-slate-800/90 hover:border-slate-600 hover:text-white'
                     }
                   `}
                   onClick={() => {
-                    onPanelChange(item.id)
+                    onNavigate(item.id)
                     closeSidebar()
                   }}
                   initial={{ opacity: 0, x: -8 }}
@@ -127,14 +129,13 @@ export default function Sidebar({ activePanel, onPanelChange }: SidebarProps) {
                 >
                   <Icon size={17} className="flex-shrink-0" />
                   <span>{item.label}</span>
-                  {isActive && <span className="ml-auto h-2 w-2 rounded-full bg-blue-300 ring-2 ring-blue-200/60" aria-hidden="true" />}
                 </motion.button>
               )
             })}
           </nav>
 
           <motion.div
-            className="mt-auto border-t border-slate-200 pt-6 space-y-3"
+            className="mt-auto border-t border-slate-700/80 pt-6 space-y-3"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: shouldReduceMotion ? 0 : 0.16, duration: 0.2 }}
@@ -143,7 +144,7 @@ export default function Sidebar({ activePanel, onPanelChange }: SidebarProps) {
               href="https://github.com/Govind-v-kartha"
               target="_blank"
               rel="noopener noreferrer"
-              className="focus-ring flex items-center gap-2 text-sm text-slate-600 hover:text-blue-700 hover:bg-slate-100/80 transition-all duration-200 rounded px-2 py-1"
+              className="focus-ring flex items-center gap-2 text-sm text-slate-300 hover:text-blue-200 hover:bg-slate-800/80 transition-all duration-200 rounded px-2 py-1"
             >
               <Github size={16} />
               <span>GitHub</span>
@@ -153,7 +154,7 @@ export default function Sidebar({ activePanel, onPanelChange }: SidebarProps) {
               href="https://www.linkedin.com/in/govind-v-kartha"
               target="_blank"
               rel="noopener noreferrer"
-              className="focus-ring flex items-center gap-2 text-sm text-slate-600 hover:text-blue-700 hover:bg-slate-100/80 transition-all duration-200 rounded px-2 py-1"
+              className="focus-ring flex items-center gap-2 text-sm text-slate-300 hover:text-blue-200 hover:bg-slate-800/80 transition-all duration-200 rounded px-2 py-1"
             >
               <Linkedin size={16} />
               <span>LinkedIn</span>
@@ -163,7 +164,7 @@ export default function Sidebar({ activePanel, onPanelChange }: SidebarProps) {
               href="/cv/Govind_V_Kartha_CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="focus-ring flex items-center gap-2 text-sm text-slate-600 hover:text-blue-700 hover:bg-slate-100/80 transition-all duration-200 rounded px-2 py-1"
+              className="focus-ring flex items-center gap-2 text-sm text-slate-300 hover:text-blue-200 hover:bg-slate-800/80 transition-all duration-200 rounded px-2 py-1"
             >
               <FileText size={16} />
               <span>View CV</span>
@@ -171,7 +172,7 @@ export default function Sidebar({ activePanel, onPanelChange }: SidebarProps) {
             </a>
             <a
               href="mailto:knvgovind@gmail.com"
-              className="focus-ring flex items-center gap-2 text-sm text-slate-600 hover:text-blue-700 hover:bg-slate-100/80 transition-all duration-200 rounded px-2 py-1"
+              className="focus-ring flex items-center gap-2 text-sm text-slate-300 hover:text-blue-200 hover:bg-slate-800/80 transition-all duration-200 rounded px-2 py-1"
             >
               <Mail size={16} />
               <span>Email</span>

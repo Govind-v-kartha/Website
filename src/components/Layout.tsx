@@ -10,7 +10,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="flex min-h-screen bg-slate-100">
       {/* Sidebar */}
-      <Sidebar activePanel="home" onPanelChange={() => {}} />
+      <Sidebar activeSection="home" onNavigate={() => {}} />
 
       {/* Main Container */}
       <div className="flex-1 flex flex-col">

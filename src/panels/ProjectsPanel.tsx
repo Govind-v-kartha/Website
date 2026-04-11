@@ -1,13 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { FolderOpen, Github, ExternalLink, Microscope, Lock, Zap } from 'lucide-react'
 import { Button } from '../components/Button'
-import Footer from '../components/Footer'
-
-type PanelType = 'home' | 'profile' | 'skills' | 'projects' | 'education' | 'contact'
-
-interface ProjectsPanelProps {
-  onPanelChange: (panel: PanelType) => void
-}
 
 const PROJECTS = [
   {
@@ -102,7 +95,7 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.22 } },
 }
 
-export default function ProjectsPanel({ onPanelChange }: ProjectsPanelProps) {
+export default function ProjectsPanel() {
   const shouldReduceMotion = useReducedMotion()
 
   return (
@@ -196,7 +189,6 @@ export default function ProjectsPanel({ onPanelChange }: ProjectsPanelProps) {
         </motion.div>
       </div>
 
-      <Footer onPanelChange={onPanelChange} />
     </div>
   )
 }

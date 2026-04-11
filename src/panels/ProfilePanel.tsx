@@ -1,12 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { User, Shield, Radar, CircuitBoard } from 'lucide-react'
-import Footer from '../components/Footer'
-
-type PanelType = 'home' | 'profile' | 'skills' | 'projects' | 'education' | 'contact'
-
-interface ProfilePanelProps {
-  onPanelChange: (panel: PanelType) => void
-}
 
 const PROFILE_SECTIONS = [
   {
@@ -51,7 +44,7 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.22 } },
 }
 
-export default function ProfilePanel({ onPanelChange }: ProfilePanelProps) {
+export default function ProfilePanel() {
   const shouldReduceMotion = useReducedMotion()
 
   return (
@@ -112,7 +105,6 @@ export default function ProfilePanel({ onPanelChange }: ProfilePanelProps) {
         </motion.div>
       </div>
 
-      <Footer onPanelChange={onPanelChange} />
     </div>
   )
 }

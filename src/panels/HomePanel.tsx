@@ -1,12 +1,11 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { Download, FileText, FolderGit2, Github, Mail, MapPin, ShieldCheck } from 'lucide-react'
 import { Button } from '../components/Button'
-import Footer from '../components/Footer'
 
-type PanelType = 'home' | 'profile' | 'skills' | 'projects' | 'education' | 'contact'
+type SectionId = 'home' | 'profile' | 'skills' | 'services' | 'projects' | 'education' | 'contact'
 
 interface HomePanelProps {
-  onPanelChange: (panel: PanelType) => void
+  onNavigate: (section: SectionId) => void
 }
 
 const containerVariants = {
@@ -29,7 +28,7 @@ const itemVariants = {
   },
 }
 
-export default function HomePanel({ onPanelChange }: HomePanelProps) {
+export default function HomePanel({ onNavigate }: HomePanelProps) {
   const shouldReduceMotion = useReducedMotion()
 
   return (
@@ -134,20 +133,19 @@ export default function HomePanel({ onPanelChange }: HomePanelProps) {
               <Download size={18} />
               <span>Download CV</span>
             </a>
-            <Button variant="secondary" size="md" icon={FolderGit2} onClick={() => onPanelChange('projects')}>
+            <Button variant="secondary" size="md" icon={FolderGit2} onClick={() => onNavigate('projects')}>
               View Projects
             </Button>
             <Button variant="tertiary" size="md" icon={Github} onClick={() => window.open('https://github.com/Govind-v-kartha', '_blank', 'noopener,noreferrer')}>
               GitHub
             </Button>
-            <Button variant="tertiary" size="md" icon={Mail} onClick={() => onPanelChange('contact')}>
+            <Button variant="tertiary" size="md" icon={Mail} onClick={() => onNavigate('contact')}>
               Engage
             </Button>
           </motion.div>
         </motion.div>
       </div>
 
-      <Footer onPanelChange={onPanelChange} />
     </div>
   )
 }

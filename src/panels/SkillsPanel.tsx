@@ -1,12 +1,5 @@
 import { motion } from 'framer-motion'
 import { Code, Shield, Radar, Wrench } from 'lucide-react'
-import Footer from '../components/Footer'
-
-type PanelType = 'home' | 'profile' | 'skills' | 'projects' | 'education' | 'contact'
-
-interface SkillsPanelProps {
-  onPanelChange: (panel: PanelType) => void
-}
 
 const CAPABILITY_AREAS = [
   {
@@ -33,6 +26,25 @@ const CAPABILITY_AREAS = [
   },
 ]
 
+const PROJECT_TOOL_GROUPS = [
+  {
+    title: 'Security Testing & Recon Tooling',
+    tools: ['Nmap', 'Selenium', 'theHarvester', 'Amass', 'Shodan'],
+  },
+  {
+    title: 'Detection & Lab Stack',
+    tools: ['Kali Linux', 'Wazuh', 'Suricata', 'Wireshark', 'VirtualBox'],
+  },
+  {
+    title: 'Engineering & Reporting Stack',
+    tools: ['Python', 'FastAPI', 'FPDF2', 'Node.js DOCX', 'OpenCV', 'NumPy'],
+  },
+  {
+    title: 'AI, Quantum & Crypto Components',
+    tools: ['Qiskit AerSimulator', 'FlexiMo ViT', 'AES-256-GCM', 'Gemini AI'],
+  },
+]
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -46,7 +58,7 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.22 } },
 }
 
-export default function SkillsPanel({ onPanelChange }: SkillsPanelProps) {
+export default function SkillsPanel() {
   return (
     <div className="panel-shell">
       <div className="panel-header">
@@ -112,6 +124,32 @@ export default function SkillsPanel({ onPanelChange }: SkillsPanelProps) {
                 <div className="icon-accent">
                   <Wrench className="w-4 h-4 text-blue-700" />
                 </div>
+                <h2 className="section-title">Tools Used Across Projects</h2>
+              </div>
+            </div>
+
+            <div className="section-card-content space-y-4">
+              {PROJECT_TOOL_GROUPS.map((group) => (
+                <div key={group.title}>
+                  <p className="section-label mb-2">{group.title}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {group.tools.map((tool) => (
+                      <span key={tool} className="meta-chip">
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.section>
+
+          <motion.section variants={itemVariants} className="section-card overflow-hidden">
+            <div className="section-header">
+              <div className="flex items-center gap-3">
+                <div className="icon-accent">
+                  <Wrench className="w-4 h-4 text-blue-700" />
+                </div>
                 <h2 className="section-title">Platforms, Programming & Quantum Basis</h2>
               </div>
             </div>
@@ -153,7 +191,6 @@ export default function SkillsPanel({ onPanelChange }: SkillsPanelProps) {
         </motion.div>
       </div>
 
-      <Footer onPanelChange={onPanelChange} />
     </div>
   )
 }

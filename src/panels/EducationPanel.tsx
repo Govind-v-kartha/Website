@@ -1,12 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { GraduationCap, Award, BookOpen, Star, CalendarDays } from 'lucide-react'
-import Footer from '../components/Footer'
-
-type PanelType = 'home' | 'profile' | 'skills' | 'projects' | 'education' | 'contact'
-
-interface EducationPanelProps {
-  onPanelChange: (panel: PanelType) => void
-}
 
 const EDUCATION = [
   {
@@ -62,7 +55,7 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.22 } },
 }
 
-export default function EducationPanel({ onPanelChange }: EducationPanelProps) {
+export default function EducationPanel() {
   const shouldReduceMotion = useReducedMotion()
 
   return (
@@ -159,7 +152,6 @@ export default function EducationPanel({ onPanelChange }: EducationPanelProps) {
         </motion.div>
       </div>
 
-      <Footer onPanelChange={onPanelChange} />
     </div>
   )
 }
