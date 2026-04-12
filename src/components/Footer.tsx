@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ArrowUp, Github, Linkedin } from 'lucide-react'
+import { ArrowUp, Github, Linkedin, Mail } from 'lucide-react'
 
 type SectionId = 'home' | 'about' | 'skills' | 'services' | 'projects' | 'certificates' | 'contact'
 
@@ -10,9 +10,8 @@ type FooterProps = {
 const QUICK_LINKS: Array<{ label: string; section: SectionId }> = [
   { label: 'Home', section: 'home' },
   { label: 'About', section: 'about' },
-  { label: 'Skills', section: 'skills' },
-  { label: 'Services', section: 'services' },
   { label: 'Projects', section: 'projects' },
+  { label: 'Credentials', section: 'certificates' },
   { label: 'Contact', section: 'contact' },
 ]
 
@@ -33,7 +32,7 @@ export default function Footer({ onNavigate }: FooterProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid gap-6 md:grid-cols-3 items-start">
           <div>
             <h3 className="text-white font-semibold text-base">Govind V Kartha</h3>
-            <p className="mt-2 text-sm text-slate-400">Built with purpose. Secured by design.</p>
+            <p className="mt-2 text-sm text-slate-400">Entry-Level Cybersecurity Portfolio</p>
           </div>
 
           <div>
@@ -53,8 +52,15 @@ export default function Footer({ onNavigate }: FooterProps) {
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-2">Social</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-2">Professional Links</p>
             <div className="flex items-center gap-2">
+              <a
+                href="mailto:knvgovind@gmail.com"
+                className="focus-ring h-9 w-9 rounded-md border border-[var(--border)] bg-[var(--surface)] text-slate-300 hover:text-[var(--accent)] hover:border-[var(--accent-soft-border)] inline-flex items-center justify-center transition-all duration-300"
+                aria-label="Email"
+              >
+                <Mail size={16} />
+              </a>
               <a
                 href="https://github.com/Govind-v-kartha"
                 target="_blank"
@@ -86,7 +92,7 @@ export default function Footer({ onNavigate }: FooterProps) {
         <button
           type="button"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="focus-ring fixed bottom-6 right-6 z-40 h-11 w-11 rounded-full bg-[var(--accent)] text-white shadow-[0_0_24px_var(--accent-glow)] hover:bg-[var(--accent-hover)] transition-all duration-300 inline-flex items-center justify-center"
+          className="focus-ring fixed bottom-6 right-6 z-40 h-11 w-11 rounded-full bg-[var(--accent)] text-white shadow-[0_0_16px_var(--accent-glow)] hover:bg-[var(--accent-hover)] transition-all duration-300 inline-flex items-center justify-center"
           aria-label="Scroll to top"
         >
           <ArrowUp size={18} />

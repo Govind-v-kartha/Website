@@ -1,92 +1,89 @@
 import { useMemo, useState } from 'react'
-import { Briefcase, Code2, ExternalLink, Github, Globe, Lock, Radar, Shield } from 'lucide-react'
+import { Briefcase, Globe, Lock, Radar, Shield } from 'lucide-react'
 import { Button } from '../components/Button'
 
-type ProjectCategory = 'All' | 'Web Security' | 'Network' | 'Forensics' | 'Research'
+type ProjectCategory = 'All' | 'Application Security' | 'Network & Forensics' | 'Research'
 
 type ProjectItem = {
   title: string
   category: Exclude<ProjectCategory, 'All'>
   tags: string[]
-  description: string
-  image?: string | null
-  github?: string | null
-  live?: string | null
-  logoSrc?: string | null
-  logoAlt?: string
+  problem: string
+  approach: string
+  outcome: string
+  githubUrl?: string
+  liveUrl?: string
+  publicNote?: string
   icon: typeof Shield
 }
 
-const FILTERS: ProjectCategory[] = ['All', 'Web Security', 'Network', 'Forensics', 'Research']
+const FILTERS: ProjectCategory[] = ['All', 'Application Security', 'Network & Forensics', 'Research']
 
 const PROJECTS: ProjectItem[] = [
   {
     title: 'PentaVault: Automated VAPT Security Suite',
-    category: 'Web Security',
+    category: 'Application Security',
     tags: ['Python', 'FastAPI', 'Selenium', 'Nmap'],
-    description: 'Structured VAPT workflow platform covering reconnaissance, testing, and reporting support.',
-    image: null,
-    github: 'https://github.com/Govind-v-kartha/PentaVault',
-    logoSrc: '/images/projects/github.svg',
-    logoAlt: 'GitHub platform logo',
+    problem: 'Need a repeatable workflow for reconnaissance, testing, and reporting across web targets.',
+    approach: 'Built a structured VAPT platform that organizes test phases and captures findings consistently.',
+    outcome: 'Improved repeatability of assessments and reduced reporting friction for learning projects.',
+    githubUrl: 'https://github.com/Govind-v-kartha/PentaVault',
     icon: Shield,
   },
   {
-    title: 'Security Testing & Analysis Lab',
-    category: 'Network',
+    title: 'Security Testing and Analysis Lab',
+    category: 'Network & Forensics',
     tags: ['Kali Linux', 'Suricata', 'Wazuh', 'Wireshark'],
-    description: 'Controlled adversary simulation and defensive visibility validation across host and network telemetry.',
-    image: null,
-    github: null,
+    problem: 'Needed a controlled environment to practice attacker simulation and defensive telemetry analysis.',
+    approach: 'Created a lab workflow for attack simulation, alert triage, and host/network visibility validation.',
+    outcome: 'Built stronger evidence-driven investigation habits for SOC-oriented scenarios.',
+    publicNote: 'Detailed walkthrough available on request (lab setup maintained as private).',
     icon: Radar,
   },
   {
-    title: 'OSINT-Based Attack Surface Profiling',
-    category: 'Web Security',
+    title: 'OSINT Attack Surface Profiling',
+    category: 'Application Security',
     tags: ['OSINT', 'Amass', 'Shodan'],
-    description: 'Passive reconnaissance workflow for asset exposure mapping and pre-assessment prioritization.',
-    image: null,
-    github: null,
+    problem: 'External assets were difficult to map quickly before security assessment planning.',
+    approach: 'Implemented a passive reconnaissance process to inventory exposed assets and prioritize scope.',
+    outcome: 'Improved pre-assessment targeting and reduced noise during active testing phases.',
+    publicNote: 'Project artifacts are private to avoid exposing target discovery workflows.',
     icon: Globe,
   },
   {
-    title: 'Hybrid AI-Quantum Satellite Image Encryption',
+    title: 'Hybrid AI-Quantum Image Encryption',
     category: 'Research',
     tags: ['Qiskit', 'AES-256-GCM', 'OpenCV'],
-    description: 'Applied quantum-classical image encryption experiment with AI-assisted ROI workflow.',
-    image: null,
-    github: null,
+    problem: 'Explored how quantum-classical ideas could be applied to secure image handling experiments.',
+    approach: 'Built a research prototype combining AI-assisted ROI handling with hybrid encryption concepts.',
+    outcome: 'Produced a proof-of-concept pipeline and documented practical constraints for future work.',
+    publicNote: 'Research summary can be shared during interviews.',
     icon: Lock,
   },
   {
     title: 'QMail: Secure Communication Prototype',
     category: 'Research',
     tags: ['Post-Quantum Concepts', 'QKD Simulation'],
-    description: 'Prototype secure messaging design exploring resilience against future cryptographic threats.',
-    image: null,
-    github: 'https://github.com/Govind-v-kartha/Qmail',
-    logoSrc: '/images/projects/github.svg',
-    logoAlt: 'GitHub platform logo',
-    icon: Code2,
+    problem: 'Wanted to study resilience of messaging design against future cryptographic shifts.',
+    approach: 'Developed a prototype communication model incorporating post-quantum security concepts.',
+    outcome: 'Strengthened understanding of secure-channel design trade-offs in emerging threat models.',
+    githubUrl: 'https://github.com/Govind-v-kartha/Qmail',
+    icon: Lock,
   },
   {
     title: 'MyShark: Network Traffic Analysis Tool',
-    category: 'Forensics',
+    category: 'Network & Forensics',
     tags: ['Python', 'Packet Analysis', 'Network Triage'],
-    description: 'Python-based packet analysis utility for suspicious traffic review and investigation assistance.',
-    image: null,
-    github: 'https://myshark.vercel.app/',
-    live: 'https://myshark.vercel.app/',
-    logoSrc: '/images/projects/vercel.svg',
-    logoAlt: 'Vercel platform logo',
+    problem: 'Needed a lightweight way to review suspicious packet patterns during analysis practice.',
+    approach: 'Built a Python-driven analysis utility with focused traffic inspection capabilities.',
+    outcome: 'Improved speed and consistency of first-pass traffic triage in lab scenarios.',
+    liveUrl: 'https://myshark.vercel.app/',
     icon: Briefcase,
   },
 ]
 
 export default function ProjectsPanel() {
   const [activeFilter, setActiveFilter] = useState<ProjectCategory>('All')
-  const [hiddenImages, setHiddenImages] = useState<Record<string, boolean>>({})
-  const [hiddenLogos, setHiddenLogos] = useState<Record<string, boolean>>({})
 
   const visibleProjects = useMemo(
     () =>
@@ -105,8 +102,8 @@ export default function ProjectsPanel() {
             <Briefcase className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="panel-title">Hands-on Project Portfolio</h1>
-            <p className="panel-subtitle">Selected learning projects across offensive testing practice, detection workflows, and quantum-security exploration.</p>
+            <h1 className="panel-title">Project Portfolio</h1>
+            <p className="panel-subtitle">Selected projects that demonstrate practical security testing, analysis, and research capability.</p>
           </div>
         </div>
       </div>
@@ -135,77 +132,49 @@ export default function ProjectsPanel() {
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {visibleProjects.map((project) => {
             const Icon = project.icon
-            const isImageVisible = project.image && !hiddenImages[project.title]
-            const showLogoCue = project.logoSrc && !hiddenLogos[project.title]
 
             return (
-              <article key={project.title} className="section-card overflow-hidden transition-all duration-300">
-                <div className="relative h-44 border-b border-[var(--border)]">
-                  {isImageVisible ? (
-                    <img
-                      src={project.image || ''}
-                      alt={project.title}
-                      className="h-full w-full object-cover"
-                      onError={() => setHiddenImages((prev) => ({ ...prev, [project.title]: true }))}
-                    />
-                  ) : (
-                    <div className="placeholder-gradient h-full w-full flex items-center justify-center">
-                      <Icon className="w-8 h-8 text-[var(--accent)]" />
-                    </div>
-                  )}
-
-                  <span className="absolute top-3 left-3 text-xs px-2 py-1 rounded bg-[color-mix(in_srgb,var(--bg-elevated)_92%,transparent)] border border-[var(--border)] text-slate-200">
+              <article key={project.title} className="section-card section-card-content space-y-3">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="icon-accent">
+                    <Icon className="w-4 h-4 text-[var(--accent)]" />
+                  </div>
+                  <span className="text-xs px-2 py-1 rounded bg-[color-mix(in_srgb,var(--bg-elevated)_92%,transparent)] border border-[var(--border)] text-slate-200">
                     {project.category}
                   </span>
+                </div>
 
-                  {showLogoCue && (
-                    <div className="absolute top-3 right-3 rounded bg-[color-mix(in_srgb,var(--bg-elevated)_92%,transparent)] border border-[var(--border)] px-2 py-1">
-                      <img
-                        src={project.logoSrc || ''}
-                        alt={project.logoAlt ?? 'Project platform logo'}
-                        className="h-4 w-16 object-contain"
-                        onError={() => setHiddenLogos((prev) => ({ ...prev, [project.title]: true }))}
-                      />
-                    </div>
+                <h2 className="section-title leading-snug">{project.title}</h2>
+
+                <div className="space-y-2 text-sm">
+                  <p className="text-slate-300"><span className="text-slate-400">Problem:</span> {project.problem}</p>
+                  <p className="text-slate-300"><span className="text-slate-400">Approach:</span> {project.approach}</p>
+                  <p className="text-slate-300"><span className="text-slate-400">Outcome:</span> {project.outcome}</p>
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span key={tag} className="meta-chip">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex flex-wrap gap-2 pt-1">
+                  {project.liveUrl && (
+                    <Button variant="secondary" size="sm" onClick={() => window.open(project.liveUrl ?? '', '_blank', 'noopener,noreferrer')}>
+                      Live Demo
+                    </Button>
+                  )}
+
+                  {project.githubUrl && (
+                    <Button variant="tertiary" size="sm" onClick={() => window.open(project.githubUrl ?? '', '_blank', 'noopener,noreferrer')}>
+                      Source Code
+                    </Button>
                   )}
                 </div>
 
-                <div className="section-card-content space-y-3">
-                  <h2 className="section-title leading-snug">{project.title}</h2>
-                  <p className="text-sm text-slate-400">{project.description}</p>
-
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="meta-chip">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex gap-2 pt-1">
-                    {project.live && (
-                      <Button
-                        variant="secondary"
-                        size="sm"
-                        icon={ExternalLink}
-                        onClick={() => window.open(project.live ?? project.github ?? '', '_blank', 'noopener,noreferrer')}
-                      >
-                        View Details
-                      </Button>
-                    )}
-
-                    {project.github && (
-                      <Button
-                        variant="tertiary"
-                        size="sm"
-                        icon={Github}
-                        onClick={() => window.open(project.github ?? '', '_blank', 'noopener,noreferrer')}
-                      >
-                        GitHub
-                      </Button>
-                    )}
-                  </div>
-                </div>
+                {!project.liveUrl && !project.githubUrl && project.publicNote && <p className="text-xs text-slate-400">{project.publicNote}</p>}
               </article>
             )
           })}

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import emailjs from '@emailjs/browser'
-import { Mail, MapPin, Github, Linkedin, CheckCircle, AlertCircle, Send } from 'lucide-react'
+import { AlertCircle, CheckCircle, Github, Linkedin, Mail, MapPin, Send } from 'lucide-react'
 import { Button } from '../components/Button'
 import { Input, TextArea } from '../components/Input'
 
@@ -8,7 +8,7 @@ export default function ContactPanel() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: 'Role or Internship Opportunity',
+    subject: 'Internship or Entry-Level Role',
     message: '',
   })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
@@ -46,8 +46,8 @@ export default function ContactPanel() {
 
       if (response.status === 200) {
         setStatus('success')
-        setMessage("Message received. I'll respond as soon as possible.")
-        setFormData({ name: '', email: '', subject: 'Role or Internship Opportunity', message: '' })
+        setMessage("Message sent successfully. I'll respond as soon as possible.")
+        setFormData({ name: '', email: '', subject: 'Internship or Entry-Level Role', message: '' })
 
         setTimeout(() => {
           setStatus('idle')
@@ -59,11 +59,11 @@ export default function ContactPanel() {
       const details = error instanceof Error ? error.message : ''
 
       if (details.includes('401') || details.includes('Invalid credentials')) {
-        setMessage('Email service configuration is invalid. Please use direct email.')
+        setMessage('Email service configuration is invalid. Please email directly at knvgovind@gmail.com.')
       } else if (details.includes('404') || details.includes('Template not found')) {
-        setMessage('Email template is unavailable. Please use direct email.')
+        setMessage('Email template is unavailable. Please email directly at knvgovind@gmail.com.')
       } else {
-        setMessage('Message sending failed. Please try again or contact directly by email.')
+        setMessage('Message sending failed. Please try again or email directly at knvgovind@gmail.com.')
       }
     }
   }
@@ -76,8 +76,8 @@ export default function ContactPanel() {
             <Mail className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="panel-title">Contact & Collaboration</h1>
-            <p className="panel-subtitle">Interested in internships, project collaboration, or security-learning discussions? Reach out through direct channels or the form.</p>
+            <h1 className="panel-title">Contact</h1>
+            <p className="panel-subtitle">For internship, junior role, or collaboration opportunities, reach out via form or direct email.</p>
           </div>
         </div>
       </div>
@@ -85,7 +85,7 @@ export default function ContactPanel() {
       <div className="panel-content">
         <div className="grid gap-5 lg:grid-cols-2">
           <section className="section-card section-card-content space-y-3">
-            <h2 className="section-title">Contact Information</h2>
+            <h2 className="section-title">Direct Channels</h2>
 
             <div className="space-y-2.5 text-sm text-slate-300">
               <div className="flex items-center gap-2.5">
@@ -118,7 +118,7 @@ export default function ContactPanel() {
 
             <div className="mt-3 inline-flex items-center gap-2 rounded-lg border border-emerald-400/30 bg-emerald-500/10 px-3 py-2 text-xs text-emerald-200">
               <CheckCircle className="w-4 h-4" />
-              Open to internships and collaborations
+              Open to internship and entry-level opportunities
             </div>
           </section>
 
@@ -160,9 +160,9 @@ export default function ContactPanel() {
                   onChange={handleChange}
                   className="focus-ring w-full h-11 px-3.5 border border-[var(--border)] rounded-lg bg-[color-mix(in_srgb,var(--bg-elevated)_92%,transparent)] text-sm text-slate-100 transition-all hover:border-[var(--accent-soft-border)] focus:outline-none"
                 >
-                  <option value="Role or Internship Opportunity">Role or Internship Opportunity</option>
+                  <option value="Internship or Entry-Level Role">Internship or Entry-Level Role</option>
                   <option value="Project Collaboration">Project Collaboration</option>
-                  <option value="Quantum Security Discussion">Quantum Security Discussion</option>
+                  <option value="Security Discussion">Security Discussion</option>
                   <option value="General Inquiry">General Inquiry</option>
                 </select>
               </div>
@@ -175,7 +175,7 @@ export default function ContactPanel() {
                 label="Message"
                 required
                 rows={5}
-                placeholder="Please share your requirement or collaboration details."
+                placeholder="Please share your requirement or opportunity details."
               />
 
               {status === 'success' && (
@@ -195,6 +195,8 @@ export default function ContactPanel() {
               <Button type="submit" variant="primary" icon={Send} isLoading={status === 'loading'} className="w-full justify-center">
                 {status === 'loading' ? 'Sending Message' : 'Send Message'}
               </Button>
+
+              <p className="text-xs text-slate-400">If the form is unavailable, please email directly at <a href="mailto:knvgovind@gmail.com" className="text-[var(--accent)] hover:text-white">knvgovind@gmail.com</a>.</p>
             </form>
           </section>
         </div>

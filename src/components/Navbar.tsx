@@ -12,9 +12,9 @@ const NAV_ITEMS: Array<{ id: SectionId; label: string }> = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
-  { id: 'services', label: 'Services' },
+  { id: 'services', label: 'Contributions' },
   { id: 'projects', label: 'Projects' },
-  { id: 'certificates', label: 'Certificates' },
+  { id: 'certificates', label: 'Credentials' },
   { id: 'contact', label: 'Contact' },
 ]
 
@@ -33,8 +33,8 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
     <header
       className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${
         isScrolled
-          ? 'backdrop-blur-md bg-[#0F1417]/88 border-[var(--border)] shadow-[0_10px_30px_rgba(0,0,0,0.35)]'
-          : 'backdrop-blur-md bg-[#0F1417]/72 border-[color-mix(in_srgb,var(--border)_80%,transparent)]'
+          ? 'backdrop-blur-md bg-[#0F1417]/92 border-[var(--border)] shadow-[0_6px_20px_rgba(0,0,0,0.28)]'
+          : 'backdrop-blur-md bg-[#0F1417]/80 border-[color-mix(in_srgb,var(--border)_82%,transparent)]'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
@@ -58,7 +58,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
                 className={`focus-ring px-3 py-1.5 rounded-md text-sm border transition-all duration-300 ${
                   isActive
                     ? 'text-white bg-[var(--accent-soft)] border-[var(--accent-soft-border)]'
-                    : 'text-slate-300 border-transparent hover:text-white hover:bg-white/5'
+                    : 'text-slate-300 border-transparent hover:text-white hover:bg-white/4'
                 }`}
                 aria-current={isActive ? 'page' : undefined}
               >
@@ -96,7 +96,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
                   className={`focus-ring text-left px-3 py-2 rounded-md text-sm border transition-all duration-300 ${
                     isActive
                       ? 'text-white bg-[var(--accent-soft)] border-[var(--accent-soft-border)]'
-                      : 'text-slate-300 border-transparent hover:text-white hover:bg-white/5'
+                      : 'text-slate-300 border-transparent hover:text-white hover:bg-white/4'
                   }`}
                 >
                   {item.label}

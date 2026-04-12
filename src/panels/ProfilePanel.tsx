@@ -1,48 +1,28 @@
-import { useEffect, useRef, useState } from 'react'
-import { MapPin, Mail, CheckCircle2, User, Award, Shield, Bug } from 'lucide-react'
+import { Award, CheckCircle2, Mail, MapPin, Shield, User } from 'lucide-react'
+import { useState } from 'react'
 
-const COUNTERS = [
-  { value: 6, suffix: '+', label: 'Security Projects', icon: Shield },
-  { value: 3, suffix: '+', label: 'Certificates', icon: CheckCircle2 },
-  { value: 2, suffix: '', label: 'Academic Degrees', icon: Award },
-  { value: 1, suffix: '+', label: 'Major Academic Recognition', icon: Bug },
+const FOCUS_AREAS = [
+  'Web Application Security Testing',
+  'Network Traffic Analysis and Triage',
+  'Vulnerability Assessment and Reporting',
+  'Detection-Aware Security Investigation',
 ]
 
-const INTERESTS = ['Offensive Security', 'Detection Analysis', 'Digital Forensics', 'Quantum Security', 'Open Source Security']
-const HOBBIES = ['Music', 'Travel', 'Sports', 'Movies']
+const CORE_FACTS = [
+  { label: 'Current Program', value: 'MSc Computer Science (Cybersecurity)' },
+  { label: 'Location', value: 'Kerala, India' },
+  { label: 'Availability', value: 'Open to Internship / Entry-Level Roles' },
+  { label: 'Work Style', value: 'Structured, evidence-driven, documentation-focused' },
+]
+
+const HIGHLIGHT_METRICS = [
+  { label: 'Security Projects', value: '6+' },
+  { label: 'Certificates', value: '4' },
+  { label: 'Academic Degrees', value: '2' },
+]
 
 export default function ProfilePanel() {
   const [imageVisible, setImageVisible] = useState(true)
-  const [counts, setCounts] = useState(COUNTERS.map(() => 0))
-  const [hasAnimated, setHasAnimated] = useState(false)
-  const counterRef = useRef<HTMLDivElement | null>(null)
-
-  useEffect(() => {
-    if (!counterRef.current || hasAnimated) return
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (!entries[0].isIntersecting) return
-
-        setHasAnimated(true)
-        const start = performance.now()
-        const duration = 1200
-
-        const tick = (now: number) => {
-          const progress = Math.min((now - start) / duration, 1)
-          setCounts(COUNTERS.map((counter) => Math.floor(counter.value * progress)))
-          if (progress < 1) requestAnimationFrame(tick)
-        }
-
-        requestAnimationFrame(tick)
-        observer.disconnect()
-      },
-      { threshold: 0.3 }
-    )
-
-    observer.observe(counterRef.current)
-    return () => observer.disconnect()
-  }, [hasAnimated])
 
   return (
     <div className="space-y-6">
@@ -54,7 +34,7 @@ export default function ProfilePanel() {
             </div>
             <div>
               <h1 className="panel-title">Professional Profile</h1>
-              <p className="panel-subtitle">Applied cybersecurity learning path across offensive testing, detection analysis, and quantum foundations.</p>
+              <p className="panel-subtitle">Entry-level cybersecurity candidate with practical project experience and a strong learning trajectory.</p>
             </div>
           </div>
         </div>
@@ -88,72 +68,57 @@ export default function ProfilePanel() {
             </div>
 
             <div className="section-card section-card-content space-y-5">
-              <div className="inline-flex items-center gap-2 pb-1 border-b border-[var(--accent-soft-border)]">
+              <div>
                 <h2 className="text-2xl font-semibold text-white">Cybersecurity Graduate (Entry-Level)</h2>
-              </div>
-
-              <p className="text-slate-300 leading-relaxed text-balance">
-                Cybersecurity fresher focused on offensive security practice, web application testing, and detection-aware
-                investigation workflows, with growing project-backed depth in quantum-security concepts.
-              </p>
-
-              <p className="text-slate-400 leading-relaxed">
-                I prioritize reproducible testing, evidence-driven reporting, and practical remediation alignment. My current
-                trajectory is to contribute in internship and entry-level roles where I can support secure engineering and
-                security operations outcomes.
-              </p>
-
-              <div className="grid gap-2 text-sm text-slate-300">
-                <p><span className="text-slate-400">Name:</span> Govind V Kartha</p>
-                <p><span className="text-slate-400">Location:</span> Kerala, India</p>
-                <p><span className="text-slate-400">Email:</span> knvgovind@gmail.com</p>
-                <p><span className="text-slate-400">Availability:</span> <span className="text-emerald-400">Open to Work</span></p>
+                <p className="mt-3 text-slate-300 leading-relaxed">
+                  I focus on practical security work: identifying vulnerabilities, validating findings with evidence, and
+                  communicating remediation steps clearly. I am seeking internship or junior cybersecurity opportunities
+                  where I can contribute to secure engineering and security operations workflows.
+                </p>
               </div>
 
               <div>
-                <p className="section-label mb-2">Interests</p>
-                <div className="flex flex-wrap gap-2">
-                  {INTERESTS.map((interest) => (
-                    <span key={interest} className="meta-chip">
-                      {interest}
-                    </span>
+                <p className="section-label mb-2">Focus Areas</p>
+                <div className="grid gap-2">
+                  {FOCUS_AREAS.map((area) => (
+                    <p key={area} className="text-sm text-slate-300 inline-flex items-start gap-2">
+                      <Shield className="w-4 h-4 text-[var(--accent)] mt-0.5" />
+                      <span>{area}</span>
+                    </p>
                   ))}
                 </div>
               </div>
 
-              <div>
-                <p className="section-label mb-2">Hobbies</p>
-                <div className="flex flex-wrap gap-2">
-                  {HOBBIES.map((hobby) => (
-                    <span key={hobby} className="meta-chip">
-                      {hobby}
-                    </span>
-                  ))}
-                </div>
+              <div className="grid gap-2 sm:grid-cols-2 text-sm text-slate-300">
+                {CORE_FACTS.map((fact) => (
+                  <p key={fact.label}>
+                    <span className="text-slate-400">{fact.label}:</span> {fact.value}
+                  </p>
+                ))}
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div ref={counterRef} className="panel-shell">
+      <div className="panel-shell">
         <div className="panel-content">
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {COUNTERS.map((counter, index) => {
-              const Icon = counter.icon
-              return (
-                <div key={counter.label} className="section-card section-card-content text-center space-y-2">
-                  <div className="mx-auto icon-accent w-fit">
-                    <Icon className="w-4 h-4 text-[var(--accent)]" />
-                  </div>
-                  <p className="text-2xl font-semibold text-white">
-                    {counts[index]}
-                    {counter.suffix}
-                  </p>
-                  <p className="text-sm text-slate-400">{counter.label}</p>
+          <div className="grid gap-3 sm:grid-cols-3">
+            {HIGHLIGHT_METRICS.map((metric) => (
+              <div key={metric.label} className="section-card section-card-content text-center space-y-2">
+                <div className="mx-auto icon-accent w-fit">
+                  {metric.label === 'Certificates' ? (
+                    <CheckCircle2 className="w-4 h-4 text-[var(--accent)]" />
+                  ) : metric.label === 'Academic Degrees' ? (
+                    <Award className="w-4 h-4 text-[var(--accent)]" />
+                  ) : (
+                    <Shield className="w-4 h-4 text-[var(--accent)]" />
+                  )}
                 </div>
-              )
-            })}
+                <p className="text-2xl font-semibold text-white">{metric.value}</p>
+                <p className="text-sm text-slate-400">{metric.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
