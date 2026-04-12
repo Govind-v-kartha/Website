@@ -32,7 +32,6 @@ export default function Footer({ onNavigate }: FooterProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid gap-6 md:grid-cols-3 items-start">
           <div>
             <h3 className="text-white font-semibold text-base">Govind V Kartha</h3>
-            <p className="mt-2 text-sm text-slate-400">Entry-Level Cybersecurity Portfolio</p>
           </div>
 
           <div>
