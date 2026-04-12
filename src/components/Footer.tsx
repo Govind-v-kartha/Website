@@ -82,8 +82,11 @@ export default function Footer({ onNavigate }: FooterProps) {
           </div>
         </div>
 
-        <div className="border-t border-[var(--border)] py-3 px-4 sm:px-6 lg:px-8 text-center text-xs text-slate-500">
-          © {currentYear} Govind V Kartha. All rights reserved.
+        <div className="border-t border-[var(--border)] bg-[color-mix(in_srgb,var(--bg-elevated)_88%,transparent)]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col sm:flex-row items-center justify-between gap-1 text-xs text-slate-500">
+            <p>&copy; {currentYear} Govind V Kartha</p>
+            <p>All rights reserved.</p>
+          </div>
         </div>
       </footer>
 
