@@ -77,7 +77,7 @@ export default function ContactPanel() {
           </div>
           <div>
             <h1 className="panel-title">Get in Touch</h1>
-            <p className="panel-subtitle">Hiring for cybersecurity, quantum security R&amp;D, or a hybrid role? Let's talk — I respond within 24 hours.</p>
+            <p className="panel-subtitle">If you're hiring, collaborating, or just want to talk shop — send a message. I usually reply within a day.</p>
           </div>
         </div>
       </div>
@@ -118,7 +118,7 @@ export default function ContactPanel() {
 
             <div className="mt-3 inline-flex items-center gap-2 rounded-lg border border-emerald-400/30 bg-emerald-500/10 px-3 py-2 text-xs text-emerald-200">
               <CheckCircle className="w-4 h-4" />
-              Available now for cybersecurity &amp; quantum security roles
+              Open to internships and entry-level roles right now
             </div>
           </section>
 

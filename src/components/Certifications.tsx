@@ -70,8 +70,8 @@ export default function Certifications() {
       <div className="panel-header">
         <div className="panel-header-row">
           <div>
-            <h1 className="panel-title">Education, Certificates & Recognition</h1>
-            <p className="panel-subtitle">Academic pathway and verified certificate links supporting current cybersecurity practice.</p>
+            <h1 className="panel-title">Education & Certificates</h1>
+            <p className="panel-subtitle">Where I studied and what I've earned along the way. All links are verifiable.</p>
           </div>
         </div>
       </div>
