@@ -1,8 +1,8 @@
-import { Code2, Shield, TerminalSquare } from 'lucide-react'
+import { Atom, Code2, Shield, TerminalSquare } from 'lucide-react'
 
 type SkillItem = {
   label: string
-  level: 'Advanced' | 'Intermediate'
+  level: 'Advanced' | 'Intermediate' | 'Foundational'
 }
 
 const SKILL_GROUPS: Array<{ title: string; icon: typeof Shield; items: SkillItem[] }> = [
@@ -28,11 +28,23 @@ const SKILL_GROUPS: Array<{ title: string; icon: typeof Shield; items: SkillItem
       { label: 'Python for Security Automation', level: 'Advanced' },
     ],
   },
+  {
+    title: 'Quantum Computing & Post-Quantum Security',
+    icon: Atom,
+    items: [
+      { label: 'Quantum Computing Fundamentals', level: 'Intermediate' },
+      { label: 'Qiskit and Quantum Circuit Simulation', level: 'Intermediate' },
+      { label: 'Post-Quantum Cryptography Concepts', level: 'Intermediate' },
+      { label: 'Quantum Key Distribution (QKD) Simulation', level: 'Foundational' },
+      { label: 'Hybrid Classical-Quantum Security Design', level: 'Foundational' },
+    ],
+  },
 ]
 
 const LEVEL_STYLES: Record<SkillItem['level'], string> = {
   Advanced: 'bg-emerald-500/10 text-emerald-200 border-emerald-400/30',
   Intermediate: 'bg-slate-500/10 text-slate-200 border-slate-400/25',
+  Foundational: 'bg-sky-500/10 text-sky-200 border-sky-400/25',
 }
 
 export default function SkillsPanel() {
@@ -70,7 +82,7 @@ export default function SkillsPanel() {
 
           <article className="section-card section-card-content">
             <p className="section-label">Current Focus</p>
-            <p className="mt-1 text-sm text-slate-300">Entry-level security operations and testing support</p>
+            <p className="mt-1 text-sm text-slate-300">Entry-level security operations, testing, and post-quantum security research</p>
           </article>
         </div>
 

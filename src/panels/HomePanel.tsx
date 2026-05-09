@@ -22,13 +22,14 @@ export default function HomePanel({ onNavigate }: HomePanelProps) {
 
             <div>
               <h1 className="text-3xl sm:text-5xl font-bold text-white leading-tight text-balance">Govind V Kartha</h1>
-              <p className="mt-3 text-xl sm:text-2xl font-semibold text-[var(--accent)]">Entry-Level Cybersecurity Analyst</p>
+              <p className="mt-3 text-xl sm:text-2xl font-semibold text-[var(--accent)]">Cybersecurity Analyst &amp; Quantum Computing Enthusiast</p>
             </div>
 
             <p className="text-slate-300 text-base sm:text-lg max-w-2xl text-balance leading-relaxed">
               Cybersecurity graduate with project-backed experience in web application testing, network analysis, and
-              security-focused research. Focused on delivering clear findings, practical remediation support, and
-              dependable execution in junior security roles.
+              security research — combined with a strong interest in quantum computing and post-quantum cryptography.
+              I work at the intersection of classical security and emerging quantum-era threats, building practical
+              skills in both fields.
             </p>
 
             <div className="flex flex-wrap gap-3">

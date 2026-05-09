@@ -6,6 +6,8 @@ const FOCUS_AREAS = [
   'Network Traffic Analysis and Triage',
   'Vulnerability Assessment and Reporting',
   'Detection-Aware Security Investigation',
+  'Quantum Computing and Qiskit Fundamentals',
+  'Post-Quantum Cryptography and QKD Concepts',
 ]
 
 const CORE_FACTS = [
@@ -69,11 +71,13 @@ export default function ProfilePanel() {
 
             <div className="section-card section-card-content space-y-5">
               <div>
-                <h2 className="text-2xl font-semibold text-white">Cybersecurity Graduate (Entry-Level)</h2>
+                <h2 className="text-2xl font-semibold text-white">Cybersecurity Graduate &amp; Quantum Computing Enthusiast</h2>
                 <p className="mt-3 text-slate-300 leading-relaxed">
-                  I focus on practical security work: identifying vulnerabilities, validating findings with evidence, and
-                  communicating remediation steps clearly. I am seeking internship or junior cybersecurity opportunities
-                  where I can contribute to secure engineering and security operations workflows.
+                  I focus on practical security work — identifying vulnerabilities, validating findings with evidence,
+                  and communicating remediation clearly — while actively building skills in quantum computing,
+                  Qiskit, and post-quantum cryptography. My interest sits at the intersection of classical
+                  cybersecurity and the quantum-era threat landscape, and I am open to roles in security analysis,
+                  secure engineering, and applied quantum-security research.
                 </p>
               </div>
 

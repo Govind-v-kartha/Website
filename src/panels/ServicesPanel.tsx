@@ -1,4 +1,4 @@
-import { FileSearch, HardDrive, Monitor, Search, Shield, Users } from 'lucide-react'
+import { Atom, FileSearch, HardDrive, Monitor, Search, Shield } from 'lucide-react'
 
 const CONTRIBUTION_AREAS = [
   {
@@ -27,9 +27,9 @@ const CONTRIBUTION_AREAS = [
     description: 'Assist with evidence collection and first-pass analysis during controlled incident response exercises.',
   },
   {
-    title: 'Security Awareness and Documentation Support',
-    icon: Users,
-    description: 'Create concise security guidance and awareness materials that improve secure day-to-day behavior.',
+    title: 'Post-Quantum & Quantum Security Exploration',
+    icon: Atom,
+    description: 'Prototype and study post-quantum cryptography, QKD simulation, and hybrid classical-quantum security designs using Qiskit and Python.',
   },
 ]
 
