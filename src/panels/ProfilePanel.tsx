@@ -2,24 +2,24 @@ import { Award, CheckCircle2, Mail, MapPin, Shield, User } from 'lucide-react'
 import { useState } from 'react'
 
 const FOCUS_AREAS = [
-  'Web Application Security Testing',
-  'Network Traffic Analysis and Triage',
-  'Vulnerability Assessment and Reporting',
-  'Detection-Aware Security Investigation',
-  'Quantum Computing and Qiskit Fundamentals',
-  'Post-Quantum Cryptography and QKD Concepts',
+  'Web Application Penetration Testing (VAPT)',
+  'Network Traffic Analysis & SOC Investigation',
+  'Vulnerability Assessment & Remediation Reporting',
+  'Digital Forensics & Incident Response',
+  'Quantum Computing & Qiskit Circuit Design',
+  'Post-Quantum Cryptography & QKD Protocols',
 ]
 
 const CORE_FACTS = [
   { label: 'Current Program', value: 'MSc Computer Science (Cybersecurity)' },
   { label: 'Location', value: 'Kerala, India' },
-  { label: 'Availability', value: 'Open to Internship / Entry-Level Roles' },
-  { label: 'Work Style', value: 'Structured, evidence-driven, documentation-focused' },
+  { label: 'Availability', value: 'Internship & Entry-Level Roles' },
+  { label: 'Work Style', value: 'Evidence-driven, documented, threat-aware' },
 ]
 
 const HIGHLIGHT_METRICS = [
-  { label: 'Security Projects', value: '6+' },
-  { label: 'Certificates', value: '4' },
+  { label: 'Security & Quantum Projects', value: '6+' },
+  { label: 'Industry Certifications', value: '4' },
   { label: 'Academic Degrees', value: '2' },
 ]
 
@@ -36,7 +36,7 @@ export default function ProfilePanel() {
             </div>
             <div>
               <h1 className="panel-title">Professional Profile</h1>
-              <p className="panel-subtitle">Entry-level cybersecurity candidate with practical project experience and a strong learning trajectory.</p>
+              <p className="panel-subtitle">Cybersecurity practitioner and quantum security researcher with shipped projects across both fields.</p>
             </div>
           </div>
         </div>
@@ -71,13 +71,14 @@ export default function ProfilePanel() {
 
             <div className="section-card section-card-content space-y-5">
               <div>
-                <h2 className="text-2xl font-semibold text-white">Cybersecurity Graduate &amp; Quantum Computing Enthusiast</h2>
+                <h2 className="text-2xl font-semibold text-white">Cybersecurity Analyst &amp; Quantum Security Researcher</h2>
                 <p className="mt-3 text-slate-300 leading-relaxed">
-                  I focus on practical security work — identifying vulnerabilities, validating findings with evidence,
-                  and communicating remediation clearly — while actively building skills in quantum computing,
-                  Qiskit, and post-quantum cryptography. My interest sits at the intersection of classical
-                  cybersecurity and the quantum-era threat landscape, and I am open to roles in security analysis,
-                  secure engineering, and applied quantum-security research.
+                  I bridge two critical disciplines: protecting today's systems through hands-on security testing,
+                  and engineering the cryptography that will protect tomorrow's. On the cybersecurity side I run
+                  end-to-end VAPT engagements, network forensics, and SOC-style alert triage. On the quantum side
+                  I design Qiskit circuits, simulate Quantum Key Distribution, and prototype post-quantum
+                  cryptographic systems. The two projects on this site that prove it — QuantMail and the Hybrid
+                  AI-Quantum Image Encryption system — are working code, not concepts.
                 </p>
               </div>
 

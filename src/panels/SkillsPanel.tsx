@@ -63,7 +63,7 @@ export default function SkillsPanel() {
           </div>
           <div>
             <h1 className="panel-title">Technical Competencies</h1>
-            <p className="panel-subtitle">Role-relevant skills presented in a clear, recruiter-friendly format.</p>
+            <p className="panel-subtitle">A working stack across offensive security, defensive operations, and quantum cryptography.</p>
           </div>
         </div>
       </div>
@@ -82,7 +82,7 @@ export default function SkillsPanel() {
 
           <article className="section-card section-card-content">
             <p className="section-label">Current Focus</p>
-            <p className="mt-1 text-sm text-slate-300">Entry-level security operations, testing, and post-quantum security research</p>
+            <p className="mt-1 text-sm text-slate-300">Security operations, application testing, and post-quantum cryptography</p>
           </article>
         </div>
 

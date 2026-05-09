@@ -2,34 +2,34 @@ import { Atom, FileSearch, HardDrive, Monitor, Search, Shield } from 'lucide-rea
 
 const CONTRIBUTION_AREAS = [
   {
-    title: 'Web and Network Security Testing Support',
+    title: 'Web & Network Penetration Testing',
     icon: Shield,
-    description: 'Support scoped testing activities, document findings clearly, and help teams prioritize practical fixes.',
+    description: 'Scope, execute, and document VAPT engagements end-to-end — from recon to validated findings to prioritized remediation.',
   },
   {
-    title: 'Vulnerability Validation and Reporting',
+    title: 'Vulnerability Validation & Reporting',
     icon: Search,
-    description: 'Assist in reproducing vulnerabilities and preparing structured reports with severity context and remediation notes.',
+    description: 'Reproduce findings with reliable PoCs, assess real-world impact, and write reports engineers can act on without ambiguity.',
   },
   {
-    title: 'SOC and Monitoring Workflow Support',
+    title: 'SOC Monitoring & Alert Triage',
     icon: Monitor,
-    description: 'Contribute to alert triage, event correlation, and investigation handoff with clear evidence tracking.',
+    description: 'Investigate alerts, correlate events across IDS/EDR/host telemetry, and hand off cases with a clear evidence trail.',
   },
   {
-    title: 'Security Review Assistance',
+    title: 'Security Configuration Review',
     icon: FileSearch,
-    description: 'Help review configurations and workflows against baseline security practices and hardening checklists.',
+    description: 'Audit infrastructure, applications, and workflows against CIS, OWASP, and NIST baselines — and close the gaps.',
   },
   {
-    title: 'Forensics and Incident Investigation Assistance',
+    title: 'Digital Forensics & Incident Response',
     icon: HardDrive,
-    description: 'Assist with evidence collection and first-pass analysis during controlled incident response exercises.',
+    description: 'Preserve evidence, perform first-pass analysis, and contribute to structured IR playbooks during real incident exercises.',
   },
   {
-    title: 'Post-Quantum & Quantum Security Exploration',
+    title: 'Post-Quantum & Quantum Security R&D',
     icon: Atom,
-    description: 'Prototype and study post-quantum cryptography, QKD simulation, and hybrid classical-quantum security designs using Qiskit and Python.',
+    description: 'Design Qiskit circuits, simulate QKD protocols, and prototype hybrid classical–quantum cryptosystems for the post-quantum era.',
   },
 ]
 
@@ -43,7 +43,7 @@ export default function ServicesPanel() {
           </div>
           <div>
             <h1 className="panel-title">How I Can Contribute</h1>
-            <p className="panel-subtitle">Practical entry-level support areas aligned to junior cybersecurity roles.</p>
+            <p className="panel-subtitle">Where I add value on day one — from offensive testing to SOC operations to quantum-era cryptography research.</p>
           </div>
         </div>
       </div>

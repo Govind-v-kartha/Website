@@ -17,19 +17,19 @@ export default function HomePanel({ onNavigate }: HomePanelProps) {
           <div className="space-y-6">
             <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/25 bg-emerald-500/8 px-3 py-1.5 text-xs text-emerald-200">
               <span className="h-2 w-2 rounded-full bg-emerald-400" />
-              Open to Entry-Level Opportunities
+              Available for Internships &amp; Entry-Level Roles
             </div>
 
             <div>
               <h1 className="text-3xl sm:text-5xl font-bold text-white leading-tight text-balance">Govind V Kartha</h1>
-              <p className="mt-3 text-xl sm:text-2xl font-semibold text-[var(--accent)]">Cybersecurity Analyst &amp; Quantum Computing Enthusiast</p>
+              <p className="mt-3 text-xl sm:text-2xl font-semibold text-[var(--accent)]">Cybersecurity Analyst &amp; Quantum Security Researcher</p>
             </div>
 
             <p className="text-slate-300 text-base sm:text-lg max-w-2xl text-balance leading-relaxed">
-              Cybersecurity graduate with project-backed experience in web application testing, network analysis, and
-              security research — combined with a strong interest in quantum computing and post-quantum cryptography.
-              I work at the intersection of classical security and emerging quantum-era threats, building practical
-              skills in both fields.
+              I secure today's systems and prepare them for tomorrow's threats. I combine hands-on cybersecurity work —
+              VAPT, network forensics, and SOC-style investigation — with applied research in quantum computing and
+              post-quantum cryptography. I have shipped working prototypes in both domains, including a quantum-secure
+              email client and a hybrid AI-quantum image encryption system.
             </p>
 
             <div className="flex flex-wrap gap-3">

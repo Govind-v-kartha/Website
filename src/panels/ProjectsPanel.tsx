@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { Briefcase, Globe, Lock, Radar, Shield } from 'lucide-react'
 import { Button } from '../components/Button'
 
-type ProjectCategory = 'All' | 'Application Security' | 'Network & Forensics' | 'Research'
+type ProjectCategory = 'All' | 'Application Security' | 'Network & Forensics' | 'Quantum Security'
 
 type ProjectItem = {
   title: string
@@ -17,66 +17,66 @@ type ProjectItem = {
   icon: typeof Shield
 }
 
-const FILTERS: ProjectCategory[] = ['All', 'Application Security', 'Network & Forensics', 'Research']
+const FILTERS: ProjectCategory[] = ['All', 'Application Security', 'Network & Forensics', 'Quantum Security']
 
 const PROJECTS: ProjectItem[] = [
   {
-    title: 'PentaVault: Automated VAPT Security Suite',
+    title: 'QuantMail — Quantum-Secure Email Client',
+    category: 'Quantum Security',
+    tags: ['Python', 'Flask', 'QKD', 'Post-Quantum Crypto', 'AES', 'Vercel'],
+    problem: 'Standard email encryption breaks the moment a cryptographically relevant quantum computer arrives — yet most users have no migration path.',
+    approach: 'Built a full quantum-secure email client integrating four security tiers: quantum one-time pad (perfect secrecy), quantum-aided AES, post-quantum cryptography (Kyber/Dilithium), and classical AES/RSA — all behind real SMTP/IMAP delivery.',
+    outcome: 'Shipped a live, deployable Flask application on Vercel with a working Quantum Key Manager client, encrypted attachments, and an admin console — proving practical quantum-era email security end-to-end.',
+    liveUrl: 'https://quantmail.vercel.app/',
+    icon: Lock,
+  },
+  {
+    title: 'Hybrid AI-Quantum Satellite Image Encryption',
+    category: 'Quantum Security',
+    tags: ['Qiskit', 'AerSimulator', 'NEQR', 'Vision Transformer', 'AES-256-GCM', 'Python'],
+    problem: 'Sensitive satellite imagery needs strong encryption, but uniform encryption wastes effort on low-value pixels and ignores the post-quantum threat to classical ciphers.',
+    approach: 'Engineered a dual-layer pipeline: a DOFA Vision Transformer (FlexiMo) segments regions of interest, then 32×32 ROI blocks are encrypted with NEQR quantum circuits in Qiskit while background regions use AES-256-GCM, fused into a single recoverable output.',
+    outcome: 'Achieved pixel-perfect reconstruction (PSNR ∞ dB, SSIM 1.0000) across the full encrypt → decrypt → verify workflow, proving zero data loss while applying real quantum encoding to high-value image regions.',
+    githubUrl: 'https://github.com/Govind-v-kartha/Hybrid_Quantum_Image_Encryption',
+    icon: Lock,
+  },
+  {
+    title: 'PentaVault — Automated VAPT Suite',
     category: 'Application Security',
     tags: ['Python', 'FastAPI', 'Selenium', 'Nmap'],
-    problem: 'Need a repeatable workflow for reconnaissance, testing, and reporting across web targets.',
-    approach: 'Built a structured VAPT platform that organizes test phases and captures findings consistently.',
-    outcome: 'Improved repeatability of assessments and reduced reporting friction for learning projects.',
+    problem: 'VAPT engagements lose time to inconsistent recon, scattered evidence, and manual report assembly across every target.',
+    approach: 'Built a phase-driven security testing platform that orchestrates reconnaissance, scanning, validation, and reporting — capturing findings to a structured store ready for export.',
+    outcome: 'Cut assessment turnaround time and produced consistent, audit-ready reports across multiple practice engagements.',
     githubUrl: 'https://github.com/Govind-v-kartha/PentaVault',
     icon: Shield,
   },
   {
-    title: 'Security Testing and Analysis Lab',
+    title: 'Security Testing & Detection Lab',
     category: 'Network & Forensics',
-    tags: ['Kali Linux', 'Suricata', 'Wazuh', 'Wireshark'],
-    problem: 'Needed a controlled environment to practice attacker simulation and defensive telemetry analysis.',
-    approach: 'Created a lab workflow for attack simulation, alert triage, and host/network visibility validation.',
-    outcome: 'Built stronger evidence-driven investigation habits for SOC-oriented scenarios.',
-    publicNote: 'Detailed walkthrough available on request (lab setup maintained as private).',
+    tags: ['Kali Linux', 'Suricata', 'Wazuh', 'Wireshark', 'Splunk'],
+    problem: 'Theory does not build SOC instincts — analysts need a controlled environment to practice the full attack-to-detection loop.',
+    approach: 'Stood up a purple-team lab combining Kali-based attack simulation with Suricata IDS, Wazuh host telemetry, and Wireshark packet analysis to produce real, traceable detection events.',
+    outcome: 'Sharpened evidence-led investigation skills across MITRE ATT&CK techniques and produced reproducible detection workflows.',
+    publicNote: 'Lab walkthrough and detection rules available on request.',
     icon: Radar,
   },
   {
     title: 'OSINT Attack Surface Profiling',
     category: 'Application Security',
-    tags: ['OSINT', 'Amass', 'Shodan'],
-    problem: 'External assets were difficult to map quickly before security assessment planning.',
-    approach: 'Implemented a passive reconnaissance process to inventory exposed assets and prioritize scope.',
-    outcome: 'Improved pre-assessment targeting and reduced noise during active testing phases.',
-    publicNote: 'Project artifacts are private to avoid exposing target discovery workflows.',
+    tags: ['OSINT', 'Amass', 'Shodan', 'Subfinder'],
+    problem: 'Active scans can miss exposed assets and trigger defenses before scope is even understood.',
+    approach: 'Built a passive reconnaissance workflow that fingerprints external assets, leaked credentials, and exposed services using OSINT tooling — producing a prioritized target inventory.',
+    outcome: 'Made pre-engagement scoping faster and noticeably reduced false positives during active testing phases.',
+    publicNote: 'Findings are kept private to protect target organizations.',
     icon: Globe,
   },
   {
-    title: 'Hybrid AI-Quantum Image Encryption',
-    category: 'Research',
-    tags: ['Qiskit', 'AES-256-GCM', 'OpenCV'],
-    problem: 'Explored how quantum-classical ideas could be applied to secure image handling experiments.',
-    approach: 'Built a research prototype combining AI-assisted ROI handling with hybrid encryption concepts.',
-    outcome: 'Produced a proof-of-concept pipeline and documented practical constraints for future work.',
-    publicNote: 'Research summary can be shared during interviews.',
-    icon: Lock,
-  },
-  {
-    title: 'QuantMail: Post-Quantum Secure Email Prototype',
-    category: 'Research',
-    tags: ['Post-Quantum Crypto', 'QKD Simulation', 'Secure Messaging'],
-    problem: 'Wanted to study resilience of email-style messaging against future cryptographic shifts.',
-    approach: 'Built a working prototype that combines post-quantum concepts with simulated Quantum Key Distribution to secure message exchange.',
-    outcome: 'Deployed a live demo illustrating secure-channel design trade-offs under emerging threat models.',
-    liveUrl: 'https://quantmail.vercel.app/',
-    icon: Lock,
-  },
-  {
-    title: 'MyShark: Network Traffic Analysis Tool',
+    title: 'MyShark — Network Traffic Triage Tool',
     category: 'Network & Forensics',
-    tags: ['Python', 'Packet Analysis', 'Network Triage'],
-    problem: 'Needed a lightweight way to review suspicious packet patterns during analysis practice.',
-    approach: 'Built a Python-driven analysis utility with focused traffic inspection capabilities.',
-    outcome: 'Improved speed and consistency of first-pass traffic triage in lab scenarios.',
+    tags: ['Python', 'Packet Analysis', 'Scapy', 'Web UI'],
+    problem: 'Wireshark is powerful but slow for first-pass triage when a SOC analyst just needs the suspicious flows highlighted fast.',
+    approach: 'Built a focused web-based traffic analyzer that surfaces protocol anomalies, suspicious endpoints, and high-volume flows in seconds rather than minutes.',
+    outcome: 'Delivered a live tool that accelerates the first 5 minutes of incident triage — the minutes that matter most.',
     liveUrl: 'https://myshark.vercel.app/',
     icon: Briefcase,
   },
@@ -103,7 +103,7 @@ export default function ProjectsPanel() {
           </div>
           <div>
             <h1 className="panel-title">Project Portfolio</h1>
-            <p className="panel-subtitle">Selected projects that demonstrate practical security testing, analysis, and research capability.</p>
+            <p className="panel-subtitle">Working code, not slideware — projects spanning offensive security, SOC operations, and quantum cryptography.</p>
           </div>
         </div>
       </div>
