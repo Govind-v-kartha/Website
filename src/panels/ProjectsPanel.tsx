@@ -67,7 +67,6 @@ const PROJECTS: ProjectItem[] = [
     problem: 'Wanted to study resilience of email-style messaging against future cryptographic shifts.',
     approach: 'Built a working prototype that combines post-quantum concepts with simulated Quantum Key Distribution to secure message exchange.',
     outcome: 'Deployed a live demo illustrating secure-channel design trade-offs under emerging threat models.',
-    githubUrl: 'https://github.com/Govind-v-kartha/Qmail',
     liveUrl: 'https://quantmail.vercel.app/',
     icon: Lock,
   },
